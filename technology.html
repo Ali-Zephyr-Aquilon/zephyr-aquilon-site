@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technology — Faraday-wave MEMS nebulizer | Zephyr Aquilon</title>
+<meta name="description" content="How Faraday-wave atomization produces a uniform, low-shear 1-5 µm aerosol at milliwatt power, and the MEMS hardware Zephyr Aquilon has built so far.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.zephyraquilon.com/technology.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zephyr Aquilon">
+<meta property="og:url" content="https://www.zephyraquilon.com/technology.html">
+<meta property="og:title" content="Technology — Faraday-wave MEMS nebulizer | Zephyr Aquilon">
+<meta property="og:description" content="How Faraday-wave atomization produces a uniform, low-shear 1-5 µm aerosol at milliwatt power, and the MEMS hardware Zephyr Aquilon has built so far.">
+<meta property="og:image" content="https://www.zephyraquilon.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Zephyr Aquilon — MEMS ultrasonic nebulizer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Technology — Faraday-wave MEMS nebulizer | Zephyr Aquilon">
+<meta name="twitter:description" content="How Faraday-wave atomization produces a uniform, low-shear 1-5 µm aerosol at milliwatt power, and the MEMS hardware Zephyr Aquilon has built so far.">
+<meta name="twitter:image" content="https://www.zephyraquilon.com/og-image.png">
+<meta name="theme-color" content="#0D1B1F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2036%2016%22%3E%3Crect%20x%3D%22-2%22%20y%3D%22-10%22%20width%3D%2240%22%20height%3D%2236%22%20fill%3D%22%230D1B1F%22%2F%3E%3Cpath%20d%3D%22M1.50%208.00%20C2.60%207.53%203.70%206.99%204.80%206.91%20C5.90%206.82%207.00%207.27%208.10%208.00%20C9.20%208.73%2010.30%209.62%2011.40%209.75%20C12.50%209.87%2013.60%209.12%2014.70%208.00%20C15.80%206.88%2016.90%205.56%2018.00%205.41%20C19.10%205.26%2020.20%206.40%2021.30%208.00%20C22.40%209.60%2023.50%2011.39%2024.60%2011.56%20C25.70%2011.73%2026.80%2010.14%2027.90%208.00%20C29.00%205.86%2030.10%203.56%2031.20%203.37%20C32.30%203.18%2033.40%205.28%2034.50%208.00%22%20fill%3D%22none%22%20stroke%3D%22%23C9AE84%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<template id="__bundler_thumbnail" data-bg-color="#0D1B1F">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0D1B1F"/>
+    <g fill="none" stroke="#C9AE84" stroke-width="4">
+      <path d="M470 470 L600 250 L730 470 Z" stroke-dasharray="10 10" opacity="0.55"/>
+      <line x1="540" y1="470" x2="660" y2="470"/>
+    </g>
+    <g fill="#9BE8DF">
+      <circle cx="560" cy="215" r="22" opacity="0.9"/>
+      <circle cx="600" cy="185" r="30" opacity="0.9"/>
+      <circle cx="645" cy="215" r="22" opacity="0.9"/>
+    </g>
+    <text x="600" y="600" text-anchor="middle" fill="#E9E4DC" font-family="Georgia, serif" font-size="52" font-style="italic">Zephyr Aquilon</text>
+  </svg>
+</template>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="index.html" aria-label="Zephyr Aquilon — home">Zephyr<svg class="mark" viewBox="0 0 36 16" role="img" aria-label="wave"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg>Aquilon</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="index.html">Overview</a>
+      <a href="technology.html" aria-current="page">Technology</a>
+      <a href="company.html">Company</a>
+      <a class="nav-cta" href="company.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="dark page-head fade-rule">
+  <div class="wrap">
+    <p class="eyebrow">Technology</p>
+    <h1>Faraday-wave atomization on a silicon chip.</h1>
+    <p class="intro">The MEMS nebulizer amplifies small piezo vibrations step by step, so the liquid at the tip vibrates and pinches off into a uniform, gentle aerosol.</p>
+    <ul class="jump">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#particle-size">Particle size</a></li>
+      <li><a href="#low-shear">Low shear</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#competition">Competition</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band" id="platform">
+  <div class="wrap">
+    <div class="split">
+      <div class="col">
+        <p class="eyebrow"><span class="ix">01</span>The platform</p>
+        <h2>Three properties, one mechanism.</h2>
+      </div>
+      <div class="col prose">
+        <p>The MEMS nebulizer amplifies small piezo vibrations step by step, so the liquid at the tip vibrates and pinches off. This phenomenon is known as Faraday-wave atomization.</p>
+        <p class="credit"><strong>With acknowledgement to the originators.</strong> The concept was invented by distinguished Professors Chen S. Tsai and Shirley C. Tsai at UC Irvine, explicitly for inhalation (<a href="https://doi.org/10.1039/c005262k" target="_blank" rel="noopener noreferrer">2010</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/19812000/" target="_blank" rel="noopener noreferrer">2009</a>, <a href="https://doi.org/10.3390/mi8020056" target="_blank" rel="noopener noreferrer">2017</a>). We build from that foundation.</p>
+      </div>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <svg class="glyph" viewBox="0 0 168 42" role="img" aria-label="Uniform droplet sizes arranged in two rows">
+          <circle class="d-good" cx="66" cy="14" r="5"/><circle class="d-good" cx="84" cy="14" r="5"/><circle class="d-good" cx="102" cy="14" r="5"/>
+          <circle class="d-good" cx="48" cy="32" r="5"/><circle class="d-good" cx="66" cy="32" r="5"/><circle class="d-good" cx="84" cy="32" r="5"/><circle class="d-good" cx="102" cy="32" r="5"/><circle class="d-good" cx="120" cy="32" r="5"/>
+        </svg>
+        <a class="tag tag--pub" href="https://pubmed.ncbi.nlm.nih.gov/19812000/" target="_blank" rel="noopener noreferrer">Published</a>
+        <div class="body"><h3>Uniform particle distribution</h3>
+        <p>Uniform particles mean maximal bioavailability and precise dosing.</p></div>
+        <p class="why">Why it matters → only a 1–5 µm aerosol reaches the deep lung.</p>
+      </article>
+      <article class="card">
+        <svg class="glyph" viewBox="0 0 168 50" role="img" aria-label="Gentle acoustic energy leaving a capsule intact">
+          <path class="d-goods" d="M14 12a26 26 0 0 1 0 26"/>
+          <path class="d-goods" d="M28 16a18 18 0 0 1 0 18" opacity=".7"/>
+          <path class="d-goods" d="M42 20a10 10 0 0 1 0 10" opacity=".45"/>
+          <circle class="d-ink" cx="92" cy="25" r="17"/>
+          <circle class="d-rule" cx="92" cy="25" r="12"/>
+          <path class="d-goods" d="M85 31c3-6 -2-9 3-12 4-3 8 2 11-2"/>
+        </svg>
+        <span class="tag tag--hyp">Hypothesis — under test</span>
+        <div class="body"><h3>Low-shear atomization</h3>
+        <p>Faraday-wave atomization ought to be gentler than incumbents.</p></div>
+        <p class="why">Why it matters → fragile payloads such as lipid-nanoparticle capsules survive instead of rupturing.</p>
+      </article>
+      <article class="card">
+        <svg class="glyph" viewBox="0 0 168 60" role="img" aria-label="A finger-sized device beside a hand-sized incumbent, showing the reduction in size">
+          <rect class="d-rule" x="14" y="10" width="52" height="40" rx="6"/>
+          <rect class="d-ink" x="120" y="14" width="18" height="36" rx="5"/>
+          <path class="d-goods" d="M78 30h28"/>
+          <path class="d-goods" d="M100 24l6 6-6 6"/>
+        </svg>
+        <a class="tag tag--pub" href="https://doi.org/10.3390/mi8020056" target="_blank" rel="noopener noreferrer">Published</a>
+        <div class="body"><h3>Low power = small format</h3>
+        <p>A minimalist, finger-sized device that fits discreetly in the pocket.</p></div>
+        <p class="why">Why it matters → convenience is exactly what the dry-powder inhaler fails to deliver; Afrezza is the cautionary example.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint" id="particle-size">
+  <div class="wrap">
+    <div class="split">
+      <div class="col">
+        <p class="eyebrow"><span class="ix">02</span>Why particle size matters</p>
+        <h2>Only one narrow band reaches the deep lung.</h2>
+      </div>
+      <div class="col prose">
+        <p>A tight droplet distribution is necessary to ensure:</p>
+        <ol>
+          <li>Maximized <b>bioavailability</b></li>
+          <li>Increased <b>dosing precision</b></li>
+          <li>Minimal throat impaction, and therefore <b>irritation</b></li>
+          <li>Reduced drug <b>waste</b></li>
+        </ol>
+      </div>
+    </div>
+    <figure class="diagram">
+      <svg viewBox="0 0 990 322" role="img" aria-label="Diagram of aerosol deposition in the respiratory tract by droplet size, showing that only the one to five micron band settles usefully in the gas-exchange region">
+        <!-- axis titles -->
+        <text class="d-lab-s" x="355" y="12" text-anchor="middle" letter-spacing="0.14em">WHERE THE DROPLET LANDS — SHALLOW → DEEP</text>
+        <text class="d-lab-s" x="16" y="171" text-anchor="middle" transform="rotate(-90 16 171)" letter-spacing="0.14em">DROPLET DIAMETER (µm)</text>
+        <!-- zone header: labels centred on their segment, sitting on one axis -->
+        <text class="d-lab" x="183" y="30" text-anchor="middle">NOSE + THROAT</text>
+        <text class="d-lab" x="320" y="30" text-anchor="middle">BRONCHI</text>
+        <text class="d-lab d-lab-em" x="493" y="30" text-anchor="middle">BRONCHIOLES + ALVEOLI</text>
+
+        <line class="d-rule" x1="110" y1="42" x2="600" y2="42"/>
+        <line class="d-rule" x1="110" y1="42" x2="110" y2="48"/>
+        <line class="d-rule" x1="255" y1="42" x2="255" y2="48"/>
+        <line class="d-rule" x1="385" y1="42" x2="385" y2="48"/>
+        <line class="d-rule" x1="600" y1="42" x2="600" y2="48"/>
+
+        <rect class="d-band" x="385" y="42" width="215" height="258"/>
+        <path class="d-airway" d="M110 56 L600 70 L600 286 L110 300 Z"/>
+        <line class="d-rule" x1="255" y1="42" x2="255" y2="300" stroke-dasharray="3 4"/>
+        <line class="d-rule" x1="385" y1="42" x2="385" y2="300" stroke-dasharray="3 4"/>
+
+        <g>
+          <line class="d-rule" x1="110" y1="88" x2="600" y2="88"/>
+          <text class="d-lab" x="100" y="91.5" text-anchor="end">&gt; 10 µm</text>
+          <circle class="d-waste dep1" cx="110" cy="88" r="9.0"/>
+          <text class="d-lab" x="616" y="86">IMPACTS IN THE THROAT</text>
+          <text class="d-lab-s" x="616" y="99">INERTIAL IMPACTION</text>
+        </g>
+        <g>
+          <line class="d-rule" x1="110" y1="134" x2="600" y2="134"/>
+          <text class="d-lab" x="100" y="137.5" text-anchor="end">5–10 µm</text>
+          <circle class="d-waste dep2" cx="110" cy="134" r="6.5"/>
+          <text class="d-lab" x="616" y="132">IMPACTS AT AIRWAY BRANCHES</text>
+          <text class="d-lab-s" x="616" y="145">IMPACTION + SEDIMENTATION</text>
+        </g>
+        <g>
+          <line class="d-rule" x1="110" y1="180" x2="600" y2="180"/>
+          <text class="d-lab d-lab-em" x="100" y="183.5" text-anchor="end">1–5 µm</text>
+          <circle class="d-good dep3" cx="110" cy="180" r="4.2"/>
+          <text class="d-lab d-lab-em" x="616" y="178">SETTLES IN THE GAS-EXCHANGE REGION</text>
+          <text class="d-lab-s" x="616" y="191">GRAVITATIONAL SEDIMENTATION</text>
+        </g>
+        <g>
+          <line class="d-rule" x1="110" y1="226" x2="600" y2="226"/>
+          <text class="d-lab" x="100" y="229.5" text-anchor="end">0.1–1 µm</text>
+          <circle class="d-waste dep4" cx="110" cy="226" r="2.3"/>
+          <text class="d-lab" x="616" y="224">MOSTLY BREATHED BACK OUT</text>
+          <text class="d-lab-s" x="616" y="237">BROWNIAN DIFFUSION</text>
+        </g>
+        <g>
+          <line class="d-rule" x1="110" y1="272" x2="600" y2="272"/>
+          <text class="d-lab" x="100" y="275.5" text-anchor="end">&lt; 0.1 µm</text>
+          <circle class="d-waste dep5" cx="110" cy="272" r="1.4"/>
+          <text class="d-lab" x="616" y="270">DEPOSITS — BUT CARRIES ALMOST NO DRUG</text>
+          <text class="d-lab-s" x="616" y="283">DIFFUSION</text>
+        </g>
+
+        <circle class="d-rule" cx="480" cy="292" r="5"/>
+        <circle class="d-rule" cx="493" cy="292" r="5"/>
+        <circle class="d-rule" cx="506" cy="292" r="5"/>
+      </svg>
+      <figcaption>Aerosol deposition by droplet diameter. Only the 1–5 µm band delivers.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band" id="low-shear">
+  <div class="wrap">
+    <div class="split">
+      <div class="col">
+        <p class="eyebrow"><span class="ix">03</span>Why low shear matters</p>
+        <h2>Lipid nanoparticles are the sharpest case.</h2>
+      </div>
+      <div class="col prose">
+        <p><b>LNPs made RNA medicines possible, but the capsule does not survive conventional nebulization.</b> Published work reports particle growth, aggregation and cargo loss from shear and interfacial stress (<a href="https://doi.org/10.1016/j.ejps.2025.107383" target="_blank" rel="noopener noreferrer">Wiebe 2026</a>, <a href="https://doi.org/10.1039/d5pm00061k" target="_blank" rel="noopener noreferrer">Heiser 2025</a>). Integrity largely holds below an energy-dissipation threshold of roughly 5–10 J/g (<a href="https://doi.org/10.1038/s41598-023-35872-4" target="_blank" rel="noopener noreferrer">van Rijn 2023</a>).</p>
+        <p>Solving inhaled biologics starts with the device.</p>
+      </div>
+    </div>
+    <figure class="diagram diagram--narrow">
+      <svg viewBox="0 0 660 196" role="img" aria-label="Diagram of an intact lipid nanoparticle being ruptured by nebulization, releasing its cargo">
+        <g>
+          <circle class="d-ink" cx="132" cy="82" r="48"/>
+          <circle class="d-rule" cx="132" cy="82" r="39"/>
+          <path class="d-goods" d="M112 92c8-14 -4-22 6-30 9-7 20 4 28-6"/>
+          <circle class="d-good" cx="112" cy="92" r="3.4"/>
+          <circle class="d-good" cx="146" cy="56" r="3.4"/>
+          <text class="d-lab d-lab-em" x="132" y="168" text-anchor="middle">INTACT</text>
+        </g>
+
+        <g>
+          <path class="d-wastes" d="M218 60h62M218 104h62"/>
+          <path class="d-wastes" d="M272 54l9 6-9 6M226 110l-9-6 9-6"/>
+          <text class="d-lab" x="254" y="34" text-anchor="middle">NEBULIZATION</text>
+          <text class="d-lab" x="254" y="132" text-anchor="middle">SHEAR + INTERFACE</text>
+        </g>
+
+        <g>
+          <path class="d-ink" d="M449.3 54.5 A48 48 0 1 0 451.6 106"/>
+          <path class="d-ink" d="M461.5 61.7 A48 48 0 0 1 463.7 96.8"/>
+          <path class="d-rule" d="M439.9 56.9 A39 39 0 1 0 441.9 104.4"/>
+          <path class="d-goods" d="M396 96c6-11 -2-19 5-25"/>
+          <circle class="d-good" cx="396" cy="96" r="3.2"/>
+          <circle class="d-good esc" cx="452" cy="58" r="3.2" style="--dx:34px;--dy:-22px"/>
+          <circle class="d-good esc" cx="460" cy="80" r="2.6" style="--dx:44px;--dy:-2px;animation-delay:.5s"/>
+          <circle class="d-good esc" cx="452" cy="102" r="3" style="--dx:36px;--dy:20px;animation-delay:1s"/>
+          <text class="d-lab d-lab-em" x="414" y="168" text-anchor="middle">RUPTURED · CARGO LOST</text>
+        </g>
+      </svg>
+      <figcaption>Illustrative. Under conventional nebulization the capsule fails and the payload does not arrive intact.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band band--tint" id="hardware">
+  <div class="wrap">
+    <div class="split">
+      <div class="col">
+        <p class="eyebrow"><span class="ix">04</span>Built so far</p>
+        <h2>From product vision to the bench.</h2>
+      </div>
+      <div class="col prose">
+        <p>Phase 1 is proof of concept and IP. What exists today is benchtop hardware: silicon resonator cells fabricated at wafer level, bonded to piezo blocks, and driven by a resonance-tracking system of our own.</p>
+      </div>
+    </div>
+    <div class="patent">
+      <span class="lab">IP</span>
+      <p><strong>1 patent filed</strong> (October 2025, European Patent Office), covering the resonance-tracking method alongside the device design, fabrication, electronic controls and microfluidics.</p>
+    </div>
+
+    <div class="vision">
+      <div class="copy">
+        <p class="eyebrow">Product vision</p>
+        <h3>A pocket-sized, connected cartridge-and-device system.</h3>
+        <p>A finger-sized inhaler with a snap-in liquid drug cartridge, paired with a companion app that guides the patient from prescription to first dose.</p>
+      </div>
+      <figure class="photo photo--device">
+        <div class="frame"><img src="assets/device-render.jpg" alt="Render of the Zephyr Aquilon device: a finger-sized inhaler with a snap-in liquid drug cartridge." width="922" height="1080" loading="lazy"></div>
+        <figcaption><b>The device.</b> Snap-in liquid cartridge.</figcaption>
+      </figure>
+      <figure class="photo photo--app">
+        <div class="frame"><img src="assets/app-wireframe.jpg" alt="Wireframe of the companion app: onboarding from prescription to first dose, then dose history and adherence tracking." width="2400" height="886" loading="lazy"></div>
+        <figcaption><b>The companion app.</b> A guided path with dose history, adherence and remote monitoring.</figcaption>
+      </figure>
+    </div>
+
+    <div class="bench">
+      <figure class="photo photo--wide">
+        <div class="frame"><img src="assets/resonator-wafer.jpg" alt="Silicon resonator cells at wafer level" width="1000" height="183" loading="lazy"></div>
+        <figcaption><b>Resonator cells, wafer level.</b> Fabricated with standard MEMS techniques.</figcaption>
+      </figure>
+      <figure class="photo photo--sm">
+        <div class="frame"><img src="assets/resonator-microfluidic.jpg" alt="Resonator cell bonded to a microfluidic chip" loading="lazy"></div>
+        <figcaption><b>Resonator cell with microfluidic chip.</b> Liquid feed to the emitting tip. Development ongoing.</figcaption>
+      </figure>
+      <figure class="photo photo--sm">
+        <div class="frame"><img src="assets/resonance-tracking-principle.jpg" alt="Principle of the strain-gauge resonance tracking system" loading="lazy"></div>
+        <figcaption><b>Resonance tracking: mechanical, not just electrical.</b> Conventional drivers infer electrical impedance from drive current. Our sensor measures mechanical impedance directly, for maximal precision.</figcaption>
+      </figure>
+      <figure class="photo photo--sm">
+        <div class="frame"><img src="assets/resonance-tracking-bench.jpg" alt="Resonance tracking electronics on the bench" loading="lazy"></div>
+        <figcaption><b>Resonance tracking, in hardware.</b> Electronic control is still in development.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="competition">
+  <div class="wrap">
+    <div class="split">
+      <div class="col">
+        <p class="eyebrow"><span class="ix">05</span>Competition</p>
+        <h2>A crowded field stuck on poor technologies.</h2>
+      </div>
+      <div class="col prose">
+        <p><b>We benchmark against vibrating mesh because it is the standard way to turn a liquid into a breathable aerosol.</b> Mesh devices from Pari, Aerogen, Omron and Philips are good products — approved, at scale, refined over two decades. They push liquid through holes and keep making the holes better.</p>
+        <p>Besides being bulky, the vibrating-mesh nebulizer shears proteins hard enough to unfold and aggregate them, and a damaged dose provokes an immune response rather than merely underperforming (<a href="https://doi.org/10.1039/d1cb00067e" target="_blank" rel="noopener noreferrer">Lundahl 2021</a>).</p>
+        <p><b>Dry powder is the other serious platform: expedient for pharma, but the complexity lands on users.</b> Afrezza, a dry-powder insulin inhaler, was approved and proved a systemic biologic could be delivered through the lung — yet it never translated into market success.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark contact band">
+  <div class="wrap cta-row">
+    <div>
+      <p class="eyebrow">Next</p>
+      <h2>The market, the roadmap and the team.</h2>
+    </div>
+    <a class="btn" href="company.html">Company →</a>
+  </div>
+</section>
+</main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <a class="wordmark" href="index.html">Zephyr<svg class="mark" viewBox="0 0 36 16" role="img" aria-label="wave"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg>Aquilon</a>
+      <p>A MEMS nebulizer for needle-free delivery of fragile biologics. Lausanne, Switzerland.</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="technology.html">Technology</a></li>
+        <li><a href="company.html">Company</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="company.html#contact">Contact form</a></li>
+        <li><a href="https://www.linkedin.com/in/ali-murat-saygili-2b3740364/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <span>Zephyr Aquilon · Lausanne, Switzerland</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+<script src="js/site.js"></script>
+</body>
+</html>
