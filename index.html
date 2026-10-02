@@ -25,7 +25,325 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<style>
+/* Zephyr Aquilon — shared stylesheet */
+:root{
+  --ink:#0A1416;--chamber:#0D1B1F;--panel:#12242A;
+  --mist:#EAF0EE;--paper:#F2F4F1;--tint:#E9EDE8;
+  --muted:#6E868C;--muted-dark:#8AA2A7;--body-ink:#354347;
+  --rule:#CBD4D0;--rule-dark:#22383E;
+  --wave:#9BE8DF;--sand:#C9AE84;--sand-ink:#7A5B2E;--warn:#C2705A;--teal:#12736A;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(1.25rem,5vw,4.5rem);
+  --maxw:1180px;
+  --band:clamp(3.5rem,8vw,6.5rem);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  font-size:clamp(1rem,.96rem + .2vw,1.125rem);line-height:1.62;font-weight:380}
+::selection{background:var(--wave);color:var(--ink)}
+img{max-width:100%}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--wave);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:1rem;top:1rem;z-index:100;background:var(--wave);color:var(--ink);padding:.5rem .8rem;font-family:var(--mono);font-size:.75rem}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* ---------- type ---------- */
+.eyebrow{font-family:var(--mono);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem;display:flex;gap:.9rem;align-items:baseline}
+.eyebrow .ix{color:var(--sand)}
+.dark .eyebrow{color:var(--muted-dark)}
+h1,h2,h3,.wordmark{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 112;letter-spacing:-.015em;line-height:1.04;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.4rem,1.3rem + 4.4vw,4.6rem)}
+h1 .h1-sub{display:block;font-weight:400;font-size:.62em;line-height:1.12;margin-top:.55em;color:var(--mist);letter-spacing:-.01em}
+h1 .h1-sub em{font-style:normal;color:var(--wave)}
+h2{font-size:clamp(1.65rem,1.2rem + 1.9vw,2.6rem);margin-bottom:1.1rem}
+h3{font-size:1.0625rem;font-variation-settings:"wdth" 100;letter-spacing:0;line-height:1.3}
+p{margin:0 0 1.05rem;text-wrap:pretty}
+b,strong{font-weight:600}
+.prose a,.credit a{text-decoration:underline;text-decoration-color:var(--sand);text-decoration-thickness:1.5px;text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+.prose a:hover,.credit a:hover{color:var(--sand-ink);text-decoration-color:var(--ink)}
+.dark .prose a:hover{color:var(--wave);text-decoration-color:var(--wave)}
+
+/* ---------- site header ---------- */
+.site-head{position:sticky;top:0;z-index:50;background:rgba(13,27,31,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-dark)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4.25rem}
+.wordmark{font-size:.9375rem;font-weight:700;font-variation-settings:"wdth" 120;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);text-decoration:none;white-space:nowrap}
+.wordmark .mark{display:inline-block;vertical-align:-.18em;height:1.15em;width:auto;margin:0 .18em;color:var(--sand);overflow:visible}
+.wordmark .mark path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.site-nav{display:flex;align-items:center;gap:2rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.site-nav a{color:var(--muted-dark);text-decoration:none;transition:color .2s;padding:.4rem 0;position:relative}
+.site-nav a:hover{color:var(--mist)}
+.site-nav a[aria-current="page"]{color:var(--mist)}
+.site-nav a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-.1rem;height:1px;background:var(--wave)}
+.site-nav a.nav-cta{color:var(--wave);border:1px solid rgba(155,232,223,.45);padding:.55rem .95rem}
+.site-nav a.nav-cta:hover{background:var(--wave);color:#071214;border-color:var(--wave)}
+.nav-toggle{display:none;font:inherit;font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--mist);border:1px solid var(--rule-dark);padding:.5rem .8rem;cursor:pointer}
+@media(max-width:720px){
+  .nav-toggle{display:block}
+  .site-nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--chamber);border-bottom:1px solid var(--rule-dark);padding:.5rem var(--pad) 1.2rem;display:none}
+  .site-nav[data-open="1"]{display:flex}
+  .site-nav a{padding:.85rem 0;border-bottom:1px solid var(--rule-dark)}
+  .site-nav a[aria-current="page"]::after{display:none}
+  .site-nav a.nav-cta{margin-top:1rem;text-align:center;border-bottom:1px solid rgba(155,232,223,.45)}
+}
+
+/* ---------- dark grounds ---------- */
+.dark{background:var(--chamber);color:var(--mist);position:relative}
+.dark h2{color:var(--mist)}
+.dark p{color:#B7C7C9}
+.dark p b,.dark p strong{color:var(--mist)}
+.fade-rule{position:relative}
+.fade-rule::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:linear-gradient(90deg,transparent,var(--rule-dark) 12%,var(--rule-dark) 88%,transparent)}
+
+/* home hero */
+.hero{padding-top:clamp(3.5rem,8vw,6rem);padding-bottom:clamp(2.5rem,5vw,3.5rem);overflow:hidden}
+.hero-grid{display:grid;gap:2rem clamp(2rem,5vw,4.5rem);grid-template-columns:minmax(0,1fr)}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:end}}
+.hero-aside p{font-size:1.0625rem;line-height:1.68;max-width:46ch}
+.hero-aside .pull{color:var(--wave);font-family:var(--display);font-size:1.25rem;line-height:1.35;font-weight:500;margin-bottom:1.4rem}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
+
+/* sub-page header */
+.page-head{padding-top:clamp(3.5rem,8vw,5.5rem);padding-bottom:clamp(3rem,6vw,4.5rem)}
+.page-head h1{font-size:clamp(2.2rem,1.3rem + 3.6vw,3.9rem);max-width:18ch}
+.page-head .intro{max-width:60ch;margin-top:1.5rem;font-size:1.125rem;line-height:1.66}
+.jump{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.2rem;padding:0;list-style:none}
+.jump a{display:block;font-family:var(--mono);font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark);text-decoration:none;border:1px solid var(--rule-dark);padding:.5rem .8rem;transition:color .2s,border-color .2s}
+.jump a:hover{color:var(--wave);border-color:rgba(155,232,223,.45)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-block;font-family:var(--mono);font-size:.8125rem;letter-spacing:.1em;text-transform:uppercase;background:var(--wave);color:#071214;text-decoration:none;padding:.95rem 1.6rem;border:1px solid var(--wave);transition:background .2s,color .2s,border-color .2s;cursor:pointer}
+.btn:hover{background:transparent;color:var(--wave)}
+.btn--ghost{background:transparent;color:var(--mist);border-color:#31545C}
+.btn--ghost:hover{color:var(--wave);border-color:var(--wave)}
+
+/* ---------- the instrument ---------- */
+.instrument{margin:clamp(2.5rem,6vw,4rem) 0 0;border:1px solid var(--rule-dark);background:#0A171B}
+.instrument-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1rem;padding:.8rem 1rem;border-bottom:1px solid var(--rule-dark);font-family:var(--mono);font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-dark)}
+.instrument-head .live{display:inline-flex;align-items:center;gap:.5rem;color:var(--wave)}
+.instrument-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wave);box-shadow:0 0 0 3px rgba(155,232,223,.18)}
+#plume,#faraday{display:block;width:100%;height:clamp(220px,30vw,320px)}
+.split-canvas{display:flex;align-items:stretch}
+.split-canvas .pane{position:relative;min-width:0}
+.split-canvas .pane--plume{flex:1.5 1 0}
+.split-canvas .pane--faraday{flex:1 1 0}
+.magnify{position:relative;margin-top:1.4rem}
+#faraday{clip-path:circle(48% at 50% 50%)}
+.lens-small{position:absolute;top:50%;left:67.5%;transform:translate(-50%,-50%);width:22px;height:22px;border:2px dashed #E5484D;border-radius:50%;box-shadow:0 0 0 3px rgba(10,23,27,.55);pointer-events:none;z-index:4}
+.lens-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:105%;aspect-ratio:1;border:2.2px dashed #E5484D;border-radius:50%;pointer-events:none;z-index:4}
+@media(max-width:640px){.split-canvas{flex-direction:column}}
+.instrument-data{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid var(--rule-dark)}
+@media(min-width:860px){.instrument-data{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
+.readouts{display:grid;grid-template-columns:1fr 1fr;align-content:start}
+@media(min-width:860px){.readouts{grid-template-columns:1fr;border-right:1px solid var(--rule-dark)}}
+.readout{padding:1.1rem 1rem}
+.readout + .readout{border-left:1px solid var(--rule-dark)}
+@media(min-width:860px){.readout + .readout{border-left:0;border-top:1px solid var(--rule-dark)}}
+.readout .k{font-family:var(--mono);font-size:.6875rem;letter-spacing:.1em;color:#9DB4B9;display:block;margin-bottom:.55rem}
+.readout .v{font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(1.4rem,.9rem + 1.4vw,2.1rem);font-weight:600;color:var(--wave);font-variant-numeric:tabular-nums;line-height:1}
+.readout .v em{font-style:normal;font-size:.55em;color:var(--muted-dark);margin-left:.25rem}
+#hist{display:block;width:100%;height:176px;margin-top:.6rem}
+.instrument-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.9rem 1.5rem;padding:.9rem 1rem;border-top:1px solid var(--rule-dark)}
+.advantages{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.advantages li{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wave);border:1px solid rgba(155,232,223,.4);border-radius:100px;padding:.4rem .85rem}
+.instrument-foot figcaption{font-family:var(--mono);font-size:.75rem;color:#84A0A6}
+
+/* key figures */
+.keyfigs{background:var(--ink);color:var(--mist);border-bottom:1px solid var(--rule-dark)}
+.keyfigs .grid{display:grid;gap:1px;background:var(--rule-dark)}
+@media(min-width:700px){.keyfigs .grid{grid-template-columns:repeat(3,1fr)}}
+.keyfig{background:var(--ink);padding:1.8rem 1.2rem}
+.keyfig .n{display:block;font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(1.8rem,1.2rem + 2.2vw,2.7rem);font-weight:700;color:var(--wave);line-height:1;font-variant-numeric:tabular-nums}
+.keyfig .t{display:block;font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;color:#93AAB0;margin-top:.8rem;line-height:1.55}
+.keyfig .t b{color:var(--mist);font-weight:500;display:block}
+
+/* ---------- light bands ---------- */
+.band{padding-top:var(--band);padding-bottom:var(--band)}
+.band + .band{border-top:1px solid var(--rule)}
+.band--tint{background:var(--tint)}
+.band--tint + .band,.band + .band--tint{border-top:0}
+.sub-block{margin-top:clamp(3rem,7vw,5rem);padding-top:clamp(2.5rem,5vw,3.5rem);border-top:1px solid var(--rule)}
+.split{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1rem,4vw,3.5rem)}
+@media(min-width:860px){.split{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}}
+.split > .col > :last-child{margin-bottom:0}
+.prose{max-width:62ch}
+.prose ol,.prose ul{margin:0 0 1.05rem;padding-left:1.3rem}
+.prose li{margin:0 0 .45rem}
+.prose li::marker{color:var(--sand);font-family:var(--mono);font-size:.85em}
+
+.cards{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);padding:1.7rem 1.5rem;display:flex;flex-direction:column}
+.card h3{margin-bottom:.55rem}
+.card p{font-size:.9375rem;line-height:1.58;color:var(--body-ink);margin:0}
+.card .why{margin-top:auto;padding-top:1rem;font-family:var(--mono);font-size:.75rem;line-height:1.55;letter-spacing:.01em;color:var(--sand-ink);font-weight:500}
+.card .why::before{content:"";display:block;border-top:1px solid var(--rule);margin-bottom:.85rem}
+.card .body{margin-bottom:1rem}
+.tag{display:inline-block;align-self:flex-start;font-family:var(--mono);font-size:.5625rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .55rem;border:1px solid var(--rule);color:var(--muted);margin-bottom:.95rem;text-decoration:none}
+.tag--pub{border-color:#9FB3A8;color:#3F6B4E;transition:background .2s,color .2s,border-color .2s}
+a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
+.tag--hyp{border-color:var(--warn);color:var(--warn)}
+.glyph{display:block;width:100%;max-width:210px;height:64px;margin-bottom:1.25rem}
+
+.credit{font-size:.9375rem;line-height:1.58;color:var(--body-ink);border-left:2px solid var(--sand);padding-left:1.1rem;margin-top:1.8rem;max-width:62ch}
+.credit strong{color:var(--ink)}
+
+/* diagrams */
+.diagram{margin:clamp(2.2rem,5vw,3.4rem) 0 0;padding:clamp(1.2rem,3vw,2rem);background:var(--paper);border:1px solid var(--rule)}
+.band--tint .diagram{background:#F2F4F1}
+.diagram svg{display:block;width:100%;height:auto;overflow:visible}
+.diagram figcaption{font-family:var(--mono);font-size:.8125rem;line-height:1.6;color:#4C5F64;margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--rule)}
+.diagram--narrow svg{max-width:660px}
+.d-rule{fill:none;stroke:var(--rule);stroke-width:1}
+.d-ink{fill:none;stroke:var(--ink);stroke-width:1.4}
+.d-good{fill:var(--teal)}
+.d-goods{fill:none;stroke:var(--teal);stroke-width:1.5}
+.d-waste{fill:#A9884E}
+.d-wastes{fill:none;stroke:#A9884E;stroke-width:1.5}
+.d-lab{font-family:var(--mono);font-size:13.5px;font-weight:700;letter-spacing:.05em;fill:#33454A}
+.d-lab-s{font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.03em;fill:#5E767C}
+.d-airway{fill:var(--ink);opacity:.045}
+.d-lab-em{fill:var(--ink);font-weight:700}
+.d-band{fill:var(--teal);opacity:.075}
+@keyframes dep1{0%{transform:translateX(0);opacity:0}7%{opacity:1}46%{transform:translateX(70px);opacity:1}80%{transform:translateX(70px);opacity:1}92%{transform:translateX(70px);opacity:0}100%{transform:translateX(0);opacity:0}}
+@keyframes dep2{0%{transform:translateX(0);opacity:0}7%{opacity:1}46%{transform:translateX(210px);opacity:1}80%{transform:translateX(210px);opacity:1}92%{transform:translateX(210px);opacity:0}100%{transform:translateX(0);opacity:0}}
+@keyframes dep3{0%{transform:translateX(0);opacity:0}7%{opacity:1}46%{transform:translateX(370px);opacity:1}80%{transform:translateX(370px);opacity:1}92%{transform:translateX(370px);opacity:0}100%{transform:translateX(0);opacity:0}}
+@keyframes dep4{0%{transform:translateX(0);opacity:0}6%{opacity:1}38%{transform:translateX(390px);opacity:1}52%{transform:translateX(390px);opacity:1}90%{transform:translateX(0);opacity:1}100%{transform:translateX(0);opacity:0}}
+@keyframes dep5{0%{transform:translateX(0);opacity:0}7%{opacity:1}46%{transform:translateX(430px);opacity:1}80%{transform:translateX(430px);opacity:1}92%{transform:translateX(430px);opacity:0}100%{transform:translateX(0);opacity:0}}
+.dep1{animation:dep1 6s cubic-bezier(.25,.7,.4,1) infinite 0s}
+.dep2{animation:dep2 6s cubic-bezier(.25,.7,.4,1) infinite .25s}
+.dep3{animation:dep3 6s cubic-bezier(.25,.7,.4,1) infinite .5s}
+.dep4{animation:dep4 6s cubic-bezier(.25,.7,.4,1) infinite .75s}
+.dep5{animation:dep5 6s cubic-bezier(.25,.7,.4,1) infinite 1s}
+@keyframes esc{0%{transform:translate(0,0);opacity:0}18%{opacity:.95}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+.esc{animation:esc 2.6s ease-out infinite}
+
+/* figures / photos */
+.vision{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:860px){.vision{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+.vision .copy{background:var(--paper);padding:clamp(1.5rem,3vw,2.5rem);display:flex;flex-direction:column;justify-content:flex-end}
+.vision .copy h3{font-size:1.375rem;font-variation-settings:"wdth" 108;margin-bottom:.8rem}
+.vision .copy p{font-size:.9375rem;color:var(--body-ink)}
+.photo{margin:0;background:var(--paper);padding:1.15rem;display:flex;flex-direction:column}
+.photo .frame{background:#E4E8E3;overflow:hidden;display:grid;place-items:center}
+.photo img{display:block;width:100%;height:100%;object-fit:contain}
+.photo figcaption{font-family:var(--mono);font-size:.8125rem;letter-spacing:.01em;color:#4C5F64;margin-top:.9rem;line-height:1.55}
+.photo figcaption b{color:var(--ink);font-weight:500}
+.photo--device .frame{background:#0E1E24;aspect-ratio:922/1080}
+.photo--app{grid-column:1/-1}
+.photo--app .frame{background:#E8E6E1;aspect-ratio:2400/886}
+.bench{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:860px){.bench{grid-template-columns:repeat(3,1fr)}.bench .photo--wide{grid-column:1/-1}}
+.bench .photo--sm .frame{aspect-ratio:3/2}
+.patent{display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;align-items:baseline;margin-top:1.8rem;padding:1.1rem 1.3rem;border:1px solid var(--rule);background:var(--paper)}
+.patent .lab{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-ink)}
+.patent p{margin:0;font-size:.9375rem;color:var(--body-ink);flex:1 1 30ch}
+.patent p strong{color:var(--ink)}
+
+/* market figures */
+.markets{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:760px){.markets{grid-template-columns:1fr 1fr}}
+.market{background:var(--paper);padding:clamp(1.5rem,3vw,2.2rem)}
+.market .lab{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-ink);display:block}
+.market .num{display:block;font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(2.1rem,1.4rem + 2.6vw,3.2rem);font-weight:600;color:var(--ink);line-height:1;margin:.8rem 0 .5rem;font-variant-numeric:tabular-nums}
+.market .unit{display:block;font-family:var(--mono);font-size:.75rem;color:var(--muted);margin-bottom:1.2rem}
+.market h3{font-size:1.25rem;font-variation-settings:"wdth" 108;margin-bottom:.6rem}
+.market p{font-size:.9375rem;line-height:1.58;color:var(--body-ink);margin:0}
+
+/* roadmap */
+.rail{margin-top:clamp(2.2rem,5vw,3rem);position:relative}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;gap:1.8rem}
+@media(min-width:900px){
+  .rail ol{grid-template-columns:repeat(5,1fr);gap:0}
+  .rail::before{content:"";position:absolute;left:11px;right:10%;top:11px;height:2px;background:linear-gradient(90deg,var(--wave) 0 16%,var(--rule) 16%)}
+  .rail li{padding-right:1.2rem}
+}
+.rail li{position:relative}
+.rail .dot{display:block;width:22px;height:22px;border-radius:50%;border:2px solid var(--rule);background:var(--paper);position:relative;z-index:1;margin-bottom:1rem}
+.band--tint .rail .dot{background:var(--tint)}
+.rail .dot--now{border-color:var(--teal);background:var(--wave)!important}
+.rail .dot--gate{border-color:var(--warn);border-radius:2px;transform:rotate(45deg);width:19px;height:19px;margin-left:1px}
+.rail .ph{display:block;font-family:var(--mono);font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.rail .st{display:block;font-family:var(--mono);font-size:.6875rem;letter-spacing:.04em;color:var(--muted);margin-top:.3rem}
+.rail .st--now{color:var(--teal);font-weight:500}
+.rail .st--gate{color:var(--warn);font-weight:500}
+.rail p{font-size:.875rem;line-height:1.5;color:var(--body-ink);margin:.7rem 0 0}
+
+/* people */
+.people{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:760px){.people{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}
+.person{background:var(--paper);padding:clamp(1.5rem,3vw,2.2rem);display:grid;gap:1.4rem;align-content:start}
+@media(min-width:560px){.person--lead{grid-template-columns:120px minmax(0,1fr)}}
+.avatar{width:120px;height:120px;border-radius:7px;position:relative;overflow:hidden;background:#DDE3DE;display:grid;place-items:center}
+.person:not(.person--lead) .avatar{width:92px;height:92px}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.avatar--empty{background:transparent;border:1.5px dashed var(--rule)}
+.person .role{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-ink);display:block;margin-bottom:.6rem}
+.person h3{font-size:1.25rem;font-variation-settings:"wdth" 108;margin-bottom:.7rem}
+.person p{font-size:.9375rem;line-height:1.58;color:var(--body-ink);margin:0 0 .9rem}
+.person .link{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--sand);padding-bottom:2px}
+.person .link:hover{color:var(--sand-ink)}
+
+/* page links (home) */
+.explore{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(2rem,4vw,3rem)}
+@media(min-width:760px){.explore{grid-template-columns:1fr 1fr}}
+.explore a{background:var(--paper);padding:clamp(1.5rem,3vw,2.4rem);text-decoration:none;display:flex;flex-direction:column;gap:.7rem;transition:background .2s}
+.explore a:hover{background:#E4EAE5}
+.explore .lab{font-family:var(--mono);font-size:.625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-ink)}
+.explore h3{font-size:clamp(1.35rem,1.1rem + .8vw,1.75rem);font-variation-settings:"wdth" 108}
+.explore p{font-size:.9375rem;color:var(--body-ink);margin:0;max-width:44ch}
+.explore .go{margin-top:auto;padding-top:.8rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);display:flex;gap:.5rem;align-items:center}
+.explore .go span{transition:transform .2s}
+.explore a:hover .go span{transform:translateX(4px)}
+
+/* contact */
+.contact{background:var(--ink)}
+.contact-grid{display:grid;gap:2.5rem clamp(2rem,5vw,4.5rem);grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.contact-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}}
+.contact p{max-width:46ch}
+.contact .direct{margin-top:1.8rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;color:var(--muted-dark);display:grid;gap:.5rem}
+.contact .direct a{color:var(--mist);text-decoration:none;border-bottom:1px solid var(--rule-dark)}
+.contact .direct a:hover{color:var(--wave);border-color:var(--wave)}
+.cta-row{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.5rem 3rem}
+.cta-row h2{max-width:20ch;margin:0}
+.cta-row p{margin:1rem 0 0}
+
+.form{max-width:600px;border:1px solid var(--rule-dark);padding:clamp(1.2rem,3vw,2rem);background:#0C181B}
+.form .row{display:grid;gap:.9rem}
+.form .row + .row{margin-top:.9rem}
+@media(min-width:560px){.form .row--2{grid-template-columns:1fr 1fr}}
+.form label{display:block;font-family:var(--mono);font-size:.625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:.4rem}
+.form input,.form select,.form textarea{width:100%;font-family:var(--body);font-size:.9375rem;color:var(--mist);background:var(--panel);border:1px solid var(--rule-dark);padding:.7rem .8rem;border-radius:0}
+.form textarea{resize:vertical;min-height:96px}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--wave)}
+.form select{appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--muted-dark) 50%),linear-gradient(135deg,var(--muted-dark) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form .actions{align-items:center;margin-top:1.4rem}
+.form button:disabled{opacity:.5;cursor:default}
+.form .status{font-family:var(--mono);font-size:.75rem;color:var(--muted-dark)}
+.form .status[data-ok="1"]{color:var(--wave)}
+.form .status[data-ok="0"]{color:var(--warn)}
+.form .fine{font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:#6A8288!important;margin:1.1rem 0 0;line-height:1.6;max-width:none}
+
+/* footer */
+.site-foot{background:var(--ink);color:#6A8288;border-top:1px solid var(--rule-dark)}
+.foot-grid{display:grid;gap:2rem;padding-top:clamp(2.5rem,5vw,3.5rem);padding-bottom:2rem;grid-template-columns:minmax(0,1fr)}
+@media(min-width:760px){.foot-grid{grid-template-columns:minmax(0,2fr) repeat(2,minmax(0,1fr))}}
+.foot-grid p{font-size:.875rem;color:#8AA2A7;max-width:36ch;margin:.9rem 0 0}
+.foot-grid h4{margin:0 0 .9rem;font-family:var(--mono);font-size:.625rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#6A8288}
+.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.04em}
+.foot-grid a{color:#A9BDC1;text-decoration:none}
+.foot-grid a:hover{color:var(--wave)}
+.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.6rem 2rem;padding-top:1.2rem;padding-bottom:1.6rem;border-top:1px solid var(--rule-dark);font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em}
+
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -266,6 +584,808 @@
     <span>© 2026</span>
   </div>
 </footer>
-<script src="js/site.js"></script>
+<script>
+/* Zephyr Aquilon — shared site script. Each block no-ops if its elements are absent. */
+function makeInstrument(opts){
+  "use strict";
+
+  var plume = document.getElementById(opts.plume);
+  var hist  = document.getElementById(opts.hist);
+  if(!plume || !hist) return;
+  var pc = plume.getContext("2d");
+  var hc = hist.getContext("2d");
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var COL = { wave:"#9BE8DF", sand:"#C9AE84", dim:"#3A5A61", mist:"#EAF0EE", muted:"#6E868C" };
+
+  // frequency → droplet size: median diameter = 0.34·λ(f); the whole MFHUN
+  // distribution scales with it while its GSD (relative width) stays fixed.
+  function faradayLambda(){
+    var s = document.getElementById("freq");
+    var f = (s ? parseFloat(s.value) : 2.0) * 1e6;
+    return Math.cbrt(8*Math.PI*(0.0728/1000)/(f*f)) * 1e6;
+  }
+  var MODE_D = 3.235;                       // native mode of MF_PROFILE (µm)
+  var MF_SCALE = 1.5;                        // draw + emit scale for the left horn
+  function freqScale(){ return 1; }         // fixed 2 MHz design point — emit the measured profile as-is
+
+  var mode = opts.mode;
+  var particles = [];
+  var sizeLog = [];          // rolling record of emitted diameters (µm)
+  var W=0, H=0, dpr=1;
+  var hW=0, hH=0;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r1 = plume.getBoundingClientRect();
+    W = r1.width; H = r1.height;
+    plume.width = W*dpr; plume.height = H*dpr;
+    pc.setTransform(dpr,0,0,dpr,0,0);
+
+    var r2 = hist.getBoundingClientRect();
+    hW = r2.width; hH = r2.height;
+    hist.width = hW*dpr; hist.height = hH*dpr;
+    hc.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  // ---- droplet size models (µm) ----
+  function gauss(){
+    var u=0,v=0;
+    while(u===0) u=Math.random();
+    while(v===0) v=Math.random();
+    return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
+  }
+  // Illustrative MFHUN size profile, given as relative weights per histogram
+  // bin so the bar shape is stated explicitly rather than left to emerge.
+  // Bin index × (DMAX/BINS) gives the lower edge in µm.
+  var MF_PROFILE = [
+    [4, 0.10],    // 2.35–2.94 µm
+    [5, 1.00],    // 2.94–3.53 µm  — mode
+    [6, 0.50],    // 3.53–4.12 µm
+    [7, 0.335],   // 4.12–4.71 µm  — two thirds of the bar to its left
+    [8, 0.167],   // 4.71–5.29 µm  — half of the bar to its left
+    [9, 0.075],   // 5.29–5.88 µm
+    [10, 0.030]   // 5.88–6.47 µm
+  ];
+  var MF_CUM = (function(){
+    var acc = 0, out = [];
+    for(var i = 0; i < MF_PROFILE.length; i++){ acc += MF_PROFILE[i][1]; out.push(acc); }
+    return { cum: out, total: acc };
+  })();
+
+  function sampleDiameter(){
+    if(mode === "mfhun"){
+      var bw = 20/BINS;   // profile bin width is fixed to its design scale, independent of display DMAX
+      var r  = Math.random()*MF_CUM.total;
+      var s  = freqScale();
+      for(var i = 0; i < MF_CUM.cum.length; i++){
+        if(r <= MF_CUM.cum[i]){
+          return (MF_PROFILE[i][0] + Math.random())*bw*s;   // uniform within the bin, scaled by f
+        }
+      }
+      return (MF_PROFILE[MF_PROFILE.length-1][0] + Math.random())*bw*s;
+    }
+    var d = Math.exp(Math.log(7.5) + gauss()*Math.log(2.35)); // broad log-normal
+    return Math.min(42, Math.max(0.4, d));
+  }
+
+  var DRIFT = 0.30;      // ambient carry speed both aerosols settle to
+  var UM_PER_PX = 0.62; // display scale: px radius = (d/2)/UM_PER_PX, clamped
+
+  function emit(){
+    var d = sampleDiameter();
+    var cy = H*0.5;
+    var nozzleX, nozzleY, spread, speed;
+    if(mode === "mfhun"){
+      // ejected normal to the flat tip face, across the narrow tip aperture
+      mfGeom();
+      nozzleX = MF.tipX * MF_SCALE;
+      nozzleY = cy + (Math.random()-0.5) * (MF.wSmall*2*MF_SCALE);
+      spread  = 0.055;
+      speed   = DRIFT + Math.random()*0.10;   // lifts off, barely moves
+    } else {
+      // extruded through pores distributed across the flat mesh plate
+      meshGeom();
+      nozzleX = MESH.plateX + 3;
+      nozzleY = cy + (Math.random()-0.5) * (MESH.ap*1.8);
+      spread  = 0.55;
+      speed   = 4.6 + Math.random()*2.2;      // pumped hard through the pore
+    }
+    var ang = gauss()*spread;
+    particles.push({
+      x: nozzleX, y: nozzleY,
+      vx: Math.cos(ang)*speed,
+      vy: Math.sin(ang)*speed,
+      d: d,
+      r: Math.max(0.7, Math.min(9, (d/2)/UM_PER_PX)),
+      life: 1
+    });
+    sizeLog.push(d);
+    if(sizeLog.length > 900) sizeLog.shift();
+  }
+
+  var SIL_LINE = "#3A6068", SIL_FILL = "rgba(21,45,52,0.62)";
+  var PZ_FILL  = "#EAF0EE";
+
+  function labelsOn(){ return W >= 240; }
+  function shortLabels(){ return W < 640; }
+
+  function label(txt, x, y, align){
+    if(!labelsOn()) return;
+    pc.save();
+    pc.font = "700 6.5px 'IBM Plex Mono', monospace";
+    pc.fillStyle = "#5E787E";
+    pc.textAlign = align || "center";
+    pc.textBaseline = "top";
+    pc.fillText(txt.toUpperCase(), x, y);
+    pc.restore();
+  }
+
+  // Lays out a row of captions, clamped to the canvas. Captions keep their full
+  // wording; on narrow canvases they wrap onto two lines, and if a pair would
+  // still collide the later one drops to a further row.
+  function labelRow(items, baseY){
+    if(!labelsOn()) return;
+    var boxes = [], i, j;
+    pc.save();
+    pc.font = "700 6.5px 'IBM Plex Mono', monospace";
+    for(i = 0; i < items.length; i++){
+      var lines = (shortLabels() && items[i].wrap) ? items[i].wrap : [items[i].txt];
+      var w = 0;
+      for(j = 0; j < lines.length; j++){
+        w = Math.max(w, pc.measureText(lines[j].toUpperCase()).width);
+      }
+      var x = Math.max(3 + w/2, Math.min(W - 3 - w/2, items[i].x));
+      boxes.push({ lines: lines, w: w, x: x, row: 0 });
+    }
+    pc.restore();
+
+    for(i = 1; i < boxes.length; i++){
+      var moved = true, guard = 0;
+      while(moved && guard++ < 6){
+        moved = false;
+        for(j = 0; j < i; j++){
+          if(boxes[j].row === boxes[i].row &&
+             Math.abs(boxes[i].x - boxes[j].x) < (boxes[i].w + boxes[j].w)/2 + 8){
+            boxes[i].row++;
+            moved = true;
+          }
+        }
+      }
+    }
+
+    var LH = 6.25, rowLines = [], offsets = [], acc = 0;
+    for(i = 0; i < boxes.length; i++){
+      rowLines[boxes[i].row] = Math.max(rowLines[boxes[i].row] || 0, boxes[i].lines.length);
+    }
+    for(i = 0; i < rowLines.length; i++){
+      offsets[i] = acc;
+      acc += (rowLines[i] || 0)*LH + 2;
+    }
+    for(i = 0; i < boxes.length; i++){
+      for(j = 0; j < boxes[i].lines.length; j++){
+        label(boxes[i].lines[j], boxes[i].x, baseY + offsets[boxes[i].row] + j*LH, "center");
+      }
+    }
+  }
+
+  // ── MFHUN: cascade of half-wavelength Fourier horn sections ──
+  var MF = { driveX:0, baseX:0, tipX:0, sections:3, segW:0, wBig:0, wSmall:0 };
+  function mfGeom(){
+    var startX = W*0.045;
+    MF.tipX  = W*0.45;
+    var avail    = MF.tipX - startX;
+    var driveLen = avail*0.34;
+    MF.driveX = startX;
+    MF.baseX  = startX + driveLen;       // drive stage ends, stage 1 begins
+    MF.segW   = (MF.tipX - MF.baseX)/MF.sections;
+    // Body half-width is capped against the drive stage length so the drive
+    // rectangle always reads wider than it is tall, at every canvas size.
+    MF.wBig   = Math.min(H*0.21, driveLen*0.39);
+    MF.wSmall = MF.wBig*0.37;
+  }
+
+  // Half-width profile as an ordered point list, drive stage included so the
+  // whole body is one polygon with no seam. At each stage boundary two points
+  // share the same x with different widths, giving a true vertical edge.
+  function mfProfile(){
+    var pts = [[MF.driveX, MF.wBig], [MF.baseX, MF.wBig]];
+    var STEPS = 32, s, k, q, x, w;
+    for(s = 0; s < MF.sections; s++){
+      var x0 = MF.baseX + MF.segW*s;
+      for(k = 0; k <= STEPS; k++){
+        q = k/STEPS;                     // lands exactly on 0 and 1
+        x = x0 + MF.segW*q;
+        w = MF.wBig + (MF.wSmall - MF.wBig)*(0.5 - 0.5*Math.cos(Math.PI*q));
+        pts.push([x, w]);
+      }
+    }
+    return pts;
+  }
+
+  function drawMFHUN(t){
+    mfGeom();
+    pc.save();
+    pc.translate(0, H*0.5); pc.scale(MF_SCALE, MF_SCALE); pc.translate(0, -H*0.5);
+    var cy  = H*0.5;
+    var pts = mfProfile();
+    var i;
+
+    // silicon body: drive stage + three horn stages, single piece
+    pc.beginPath();
+    pc.moveTo(pts[0][0], cy - pts[0][1]);
+    for(i = 1; i < pts.length; i++) pc.lineTo(pts[i][0], cy - pts[i][1]);
+    for(i = pts.length - 1; i >= 0; i--) pc.lineTo(pts[i][0], cy + pts[i][1]);
+    pc.closePath();
+    pc.fillStyle = SIL_FILL;
+    pc.fill();
+    pc.strokeStyle = SIL_LINE;
+    pc.lineWidth = 1;
+    pc.stroke();
+
+    // piezo element centred within the drive stage
+    var pzW = (MF.baseX - MF.driveX)*0.80;
+    var pzH = MF.wBig*2*0.80;
+    var pzX = (MF.driveX + MF.baseX)/2 - pzW/2;
+    var pzY = cy - pzH/2;
+    pc.beginPath();
+    pc.rect(pzX, pzY, pzW, pzH);
+    pc.fillStyle = PZ_FILL;
+    pc.fill();
+    pc.strokeStyle = "rgba(201,174,132,0.95)";
+    pc.stroke();
+
+    // emitting tip face
+    pc.beginPath();
+    pc.moveTo(MF.tipX, cy - MF.wSmall);
+    pc.lineTo(MF.tipX, cy + MF.wSmall);
+    pc.strokeStyle = "rgba(155,232,223,0.60)";
+    pc.lineWidth = 1.8;
+    pc.stroke();
+    pc.lineWidth = 1;
+
+    label("", (MF.driveX + MF.baseX)/2, cy - MF.wBig - 14, "center");
+    labelRow([
+      { txt:"piezo-driven stage",    wrap:["piezo-driven","stage"],    x:(MF.driveX + MF.baseX)/2 },
+      { txt:"multi-stage amplifying resonator", wrap:["multi-stage amplifying","resonator"], x:(MF.baseX  + MF.tipX)/2  },
+      { txt:"tip",                                                     x: MF.tipX + 11            }
+    ], cy + MF.wBig + 12);
+  }
+
+  // ── Vibrating mesh nebulizer: reservoir, annular piezo, flat perforated plate ──
+  var MESH = { resX0:0, plateX:0, ap:0 };
+  function meshGeom(){
+    MESH.resX0  = W*0.055;
+    MESH.plateX = W*0.255;               // plate is bonded straight onto the reservoir
+    MESH.ap     = H*0.145;               // aperture half-height
+  }
+
+  function drawMesh(t){
+    meshGeom();
+    var cy  = H*0.5;
+    var osc = reduced ? 0 : Math.sin(t*0.22)*1.6;
+    var resH = H*0.37;
+
+    // reservoir, butted directly against the plate
+    pc.beginPath();
+    pc.rect(MESH.resX0, cy - resH/2, MESH.plateX - MESH.resX0, resH);
+    pc.fillStyle = SIL_FILL;
+    pc.fill();
+    pc.strokeStyle = SIL_LINE;
+    pc.lineWidth = 1;
+    pc.stroke();
+
+    // liquid (blue-ish, filling the reservoir)
+    pc.beginPath();
+    pc.rect(MESH.resX0 + 4, cy - resH/2 + 4, (MESH.plateX - MESH.resX0) - 5, resH - 8);
+    pc.fillStyle = "rgba(90,150,214,0.42)";
+    pc.fill();
+
+    // piezo elements clamping the plate top and bottom
+    pc.fillStyle = PZ_FILL;
+    pc.fillRect(MESH.plateX - 6, cy - MESH.ap - 13, 12, 13);
+    pc.fillRect(MESH.plateX - 6, cy + MESH.ap,      12, 13);
+
+    // flat perforated plate, pores drawn as gaps in the plate line
+    var pores = 9;
+    var px = MESH.plateX + osc;
+    pc.strokeStyle = "rgba(234,240,238,0.88)";
+    pc.lineWidth = 2.2;
+    pc.lineCap = "butt";
+    var top = cy - MESH.ap, span = MESH.ap*2;
+    var gap = 3.0, pitch = span/pores;
+    pc.beginPath();
+    pc.moveTo(px, top);
+    for(var i = 0; i < pores; i++){
+      var pyc = top + pitch*(i + 0.5);   // pore centre
+      pc.lineTo(px, pyc - gap/2);
+      pc.moveTo(px, pyc + gap/2);
+    }
+    pc.lineTo(px, top + span);
+    pc.stroke();
+    pc.lineWidth = 1;
+
+    label("piezo", MESH.plateX, cy - MESH.ap - 26, "center");
+    labelRow([
+      { txt:"reservoir", x:(MESH.resX0 + MESH.plateX)/2 },
+      { txt:"mesh",                    x: MESH.plateX + 6             }
+    ], cy + resH/2 + 12);
+  }
+
+  function step(t){
+    pc.clearRect(0,0,W,H);
+
+    if(mode === "mfhun"){ drawMFHUN(t); pc.restore(); } else drawMesh(t);
+
+    var rate = reduced ? 1 : (mode === "mfhun" ? 1 : 3);
+    for(var e=0;e<rate;e++) emit();
+
+    pc.lineCap = "round";
+    for(var i=particles.length-1;i>=0;i--){
+      var p = particles[i];
+      p.px = p.x; p.py = p.y;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if(mode !== "mfhun"){
+        // Micron droplets shed their ejection momentum almost immediately:
+        // the high velocity exists only in the near field at the pore.
+        p.vx = DRIFT + (p.vx - DRIFT)*0.90;
+        p.vy *= 0.90;
+        p.vy += 0.0016 * p.d;            // big droplets fall out
+      }
+
+      p.life -= 0.0042;
+      if(p.life <= 0 || p.x > W+20 || p.y < -30 || p.y > H+30){
+        particles.splice(i,1);
+        continue;
+      }
+
+      var inWindow = p.d >= 1 && p.d <= 5;
+      var a = Math.max(0, Math.min(1, p.life)) * 0.85;
+      var col = inWindow
+        ? "rgba(155,232,223," + a + ")"
+        : "rgba(201,174,132," + (a*0.75) + ")";
+      var sp = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+
+      if(sp > 1.3){                       // fast enough to read as a streak
+        pc.strokeStyle = col;
+        pc.lineWidth = Math.max(1, p.r*1.6);
+        pc.beginPath();
+        pc.moveTo(p.px, p.py);
+        pc.lineTo(p.x, p.y);
+        pc.stroke();
+      } else {
+        pc.fillStyle = col;
+        pc.beginPath();
+        pc.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        pc.fill();
+      }
+    }
+    pc.lineWidth = 1;
+    if(particles.length > 1400) particles.splice(0, particles.length-1400);
+  }
+
+  // ---- histogram ----
+  var BINS = 34, DMAX = 10;
+  function drawHist(){
+    hc.clearRect(0,0,hW,hH);
+    if(sizeLog.length < 20) return;
+
+    var pad = 16, padL = 42, axisH = 38, headH = 27;
+    var plotH = hH - axisH - headH;
+    var bins = new Array(BINS).fill(0);
+    var inW = 0;
+    for(var i=0;i<sizeLog.length;i++){
+      var d = sizeLog[i];
+      if(d>=1 && d<=5) inW++;
+      var b = Math.floor((Math.min(d, DMAX)/DMAX)*BINS);
+      if(b>=BINS) b = BINS-1;
+      bins[b]++;
+    }
+    var max = Math.max.apply(null, bins) || 1;
+    var bw = (hW - padL - pad)/BINS;
+
+    // y-axis title (vertical, clear of the header row)
+    hc.save();
+    hc.fillStyle = "#9DB4B9";
+    hc.font = "700 13px 'IBM Plex Mono', monospace";
+    hc.textAlign = "center";
+    hc.textBaseline = "middle";
+    hc.translate(15, headH + plotH/2);
+    hc.rotate(-Math.PI/2);
+    hc.fillText("SHARE OF DROPLETS", 0, 0);
+    hc.restore();
+
+    // respirable window band
+    var x1 = padL + (1/DMAX)*(hW-padL-pad);
+    var x2 = padL + (5/DMAX)*(hW-padL-pad);
+    hc.fillStyle = "rgba(155,232,223,0.09)";
+    hc.fillRect(x1, headH, x2-x1, plotH+2);
+    hc.fillStyle = "#9BE8DF";
+    hc.font = "700 13px 'IBM Plex Mono', monospace";
+    hc.textAlign = "center";
+    hc.fillText("TARGET WINDOW 1\u20135 \u00b5m", (x1+x2)/2, 5);
+    hc.strokeStyle = "rgba(155,232,223,0.35)";
+    hc.setLineDash([3,3]);
+    hc.beginPath();
+    hc.moveTo(x1+0.5, headH); hc.lineTo(x1+0.5, headH+plotH);
+    hc.moveTo(x2+0.5, headH); hc.lineTo(x2+0.5, headH+plotH);
+    hc.stroke();
+    hc.setLineDash([]);
+
+    for(var b2=0;b2<BINS;b2++){
+      var h = (bins[b2]/max)*plotH;
+      if(bins[b2] > 0) h = Math.max(h, 2.5);   // keep the sparse tail visible
+      var cx = padL + b2*bw;
+      var mid = ((b2+0.5)/BINS)*DMAX;
+      hc.fillStyle = (mid>=1 && mid<=5) ? "rgba(155,232,223,0.9)" : "rgba(201,174,132,0.55)";
+      hc.fillRect(cx+0.5, headH+plotH-h, Math.max(1, bw-1.5), h);
+    }
+
+    // x-axis rule, ticks, values and title
+    hc.strokeStyle = "rgba(126,151,157,0.55)";
+    hc.beginPath();
+    hc.moveTo(padL, headH+plotH+0.5); hc.lineTo(hW-pad, headH+plotH+0.5);
+    hc.stroke();
+
+    hc.fillStyle = "#8AA2A7";
+    hc.font = "700 13px 'IBM Plex Mono', monospace";
+    hc.textBaseline = "top";
+    [0,2,4,6,8,10].forEach(function(v){
+      var x = padL + (v/DMAX)*(hW-padL-pad);
+      hc.beginPath();
+      hc.moveTo(x+0.5, headH+plotH); hc.lineTo(x+0.5, headH+plotH+4);
+      hc.stroke();
+      hc.textAlign = v===0 ? "left" : (v===20 ? "right" : "center");
+      hc.fillText(String(v), x, headH+plotH+7);
+    });
+    hc.textAlign = "center";
+    hc.fillStyle = "#8AA2A7";
+    hc.font = "700 13px 'IBM Plex Mono', monospace";
+    hc.fillText("DROPLET DIAMETER (\u00b5m)", hW/2, headH+plotH+20);
+    hc.textAlign = "left";
+
+    // readouts
+    var sorted = sizeLog.slice().sort(function(a,b){return a-b;});
+    var med = sorted[Math.floor(sorted.length/2)];
+    var rm = opts.medId && document.getElementById(opts.medId);
+    if(rm) rm.innerHTML = med.toFixed(1) + "<em>µm</em>";
+    var rf = document.getElementById(opts.fracId);
+    if(rf) rf.innerHTML = Math.round((inW/sizeLog.length)*100) + "<em>%</em>";
+  }
+
+  function setVelocity(){
+    var el = document.getElementById(opts.velId);
+    if(!el) return;
+    el.innerHTML = (mode === "mfhun") ? "\u226A1<em>m/s</em>" : "10\u201312<em>m/s</em>";
+  }
+
+  // ---- mode is fixed per instance (no in-figure toggle) ----
+
+  var last = 0;
+  function loop(t){
+    step(t);
+    if(t - last > 180){ drawHist(); last = t; }
+    requestAnimationFrame(loop);
+  }
+
+  // frequency drives the size distribution: reset the rolling record so the
+  // histogram and plume snap to the new drive point instead of blending
+  var fslider = opts.mode === "mfhun" ? document.getElementById("freq") : null;
+  if(fslider) fslider.addEventListener("input", function(){
+    sizeLog.length = 0; particles.length = 0;
+    if(reduced){ for(var i=0;i<500;i++) emit(); step(0); drawHist(); }
+  });
+
+  window.addEventListener("resize", resize);
+  resize();
+  setVelocity();
+
+  if(reduced){
+    for(var i=0;i<500;i++) emit();
+    step(0);
+    drawHist();
+  } else {
+    requestAnimationFrame(loop);
+  }
+}
+makeInstrument({plume:"plume",  hist:"hist",  mode:"mfhun", fracId:"r-frac",  velId:"r-vel",  medId:null});
+
+(function(){
+  "use strict";
+  var cv = document.getElementById("faraday");
+  var slider = document.getElementById("freq");
+  if(!cv) return;
+  var ctx = cv.getContext("2d");
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Lang 1962: capillary (Faraday) wavelength from Kelvin's relation, and the
+  // droplet diameter as a fixed fraction of it. Surface responds at f/2.
+  var SIGMA = 0.0728, RHO = 1000;          // water at 20 °C
+  var C_LANG = 0.34;
+  function lambdaUm(fMHz){
+    var f = fMHz * 1e6;
+    return Math.cbrt(8 * Math.PI * (SIGMA/RHO) / (f*f)) * 1e6;
+  }
+
+  var FACE_UM = 46;                        // width of tip face depicted
+  var NU = 46, NV = 34;                    // mesh resolution
+  var fMHz = slider ? parseFloat(slider.value) : 2.0;
+  var W = 0, H = 0, dpr = 1;
+  var drops = [], armed = false;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W*dpr; cv.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  // oblique projection, then rotated 90° clockwise so the tip emits
+  // horizontally (to the right) instead of vertically upward.
+  function projRaw(u, v, h){
+    var spanX = W*0.30, skewX = W*0.105, spanY = H*0.135, hS = H*0.115;
+    return [ W*0.46 + u*spanX + v*skewX,
+             H*0.60 + v*spanY - h*hS ];
+  }
+  function proj(u, v, h){
+    var p = projRaw(u, v, h);
+    var cx = W/2, cy = H/2;
+    var dx = p[0]-cx, dy = p[1]-cy;
+    return [ cx - dy, cy + dx ];            // 90° CW about the pane centre
+  }
+
+  function surface(u, v, k, phase){
+    return Math.sin(k*u*FACE_UM/2) * Math.sin(k*v*FACE_UM/2) * Math.cos(phase);
+  }
+
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    ctx.save();
+    ctx.translate(W/2, H/2); ctx.scale(0.8, 0.8); ctx.translate(-W/2, -H/2);
+    var lam = lambdaUm(fMHz);
+    var k = 2*Math.PI/lam;
+    var phase = reduced ? 0.9 : t*0.0042;         // surface: subharmonic
+    var plate = Math.cos(phase*2);                 // tip face: drive frequency
+
+    // vibrating tip face — the emitting face at the end of the Fourier horn
+    var faceH = -1.05 + plate*0.10;
+    var corners = [[-1,-1],[1,-1],[1,1],[-1,1]];
+    var hp = function(i, s, h){ return proj(corners[i][0]*s, corners[i][1]*s, h); };
+    var wallOrder = [0,1,3,2];   // far edge first, near edge last (crude painter's sort)
+
+    // Fourier-horn body: a pyramid converging up to the emitting tip face.
+    // The wide base square (drawn dotted) sits below; solid faces converge to
+    // the small tip face where the Faraday waves form — reflecting the real horn.
+    var BASE_S = 1.5, baseH = faceH - 2.0;
+    var tipC = [], baseC = [], c;
+    for(c=0;c<4;c++){ tipC.push(hp(c,1,faceH)); baseC.push(hp(c,BASE_S,baseH)); }
+
+    // converging faces (faint fill), far edge first
+    for(var w=0; w<4; w++){
+      var a = wallOrder[w], b = (a+1)%4;
+      ctx.beginPath();
+      ctx.moveTo(tipC[a][0],tipC[a][1]); ctx.lineTo(tipC[b][0],tipC[b][1]);
+      ctx.lineTo(baseC[b][0],baseC[b][1]); ctx.lineTo(baseC[a][0],baseC[a][1]);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(18,40,47,0.55)";
+      ctx.fill();
+    }
+    // solid converging edges (tip corner → base corner)
+    ctx.strokeStyle = "rgba(201,174,132,0.34)";
+    ctx.lineWidth = 1;
+    for(c=0;c<4;c++){
+      ctx.beginPath();
+      ctx.moveTo(tipC[c][0],tipC[c][1]); ctx.lineTo(baseC[c][0],baseC[c][1]);
+      ctx.stroke();
+    }
+    // dotted base square
+    ctx.save();
+    ctx.setLineDash([4,4]);
+    ctx.strokeStyle = "rgba(201,174,132,0.42)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(baseC[0][0],baseC[0][1]);
+    for(c=1;c<4;c++) ctx.lineTo(baseC[c][0],baseC[c][1]);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+
+    // solid tip face (the emitting surface, apex of the pyramid)
+    ctx.beginPath();
+    for(c=0;c<4;c++){
+      var p = proj(corners[c][0], corners[c][1], faceH);
+      if(c===0) ctx.moveTo(p[0],p[1]); else ctx.lineTo(p[0],p[1]);
+    }
+    ctx.closePath();
+    ctx.fillStyle = "rgba(201,174,132,0.16)";
+    ctx.fill();
+    ctx.strokeStyle = "rgba(201,174,132,0.6)";
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    // vertical edges joining the liquid surface to the Fourier-horn tip face
+    // (the liquid column walls) — same teal as the liquid
+    ctx.strokeStyle = "rgba(155,232,223,0.5)";
+    ctx.lineWidth = 1;
+    for(c=0;c<4;c++){
+      var cx = corners[c][0], cy = corners[c][1];
+      var top = proj(cx, cy, surface(cx, cy, k, phase));
+      var bot = proj(cx, cy, faceH);
+      ctx.beginPath();
+      ctx.moveTo(top[0], top[1]);
+      ctx.lineTo(bot[0], bot[1]);
+      ctx.stroke();
+    }
+    for(var j=0;j<NV;j++){
+      var v0 = -1 + 2*j/NV, v1 = -1 + 2*(j+1)/NV;
+      ctx.beginPath();
+      var i, u, p0;
+      for(i=0;i<=NU;i++){
+        u = -1 + 2*i/NU;
+        p0 = proj(u, v0, surface(u,v0,k,phase));
+        if(i===0) ctx.moveTo(p0[0],p0[1]); else ctx.lineTo(p0[0],p0[1]);
+      }
+      for(i=NU;i>=0;i--){
+        u = -1 + 2*i/NU;
+        p0 = proj(u, v1, surface(u,v1,k,phase));
+        ctx.lineTo(p0[0],p0[1]);
+      }
+      ctx.closePath();
+      var depth = (v0+1)/2;
+      ctx.fillStyle = "rgba(13,40,46," + (0.55 + depth*0.35) + ")";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(155,232,223," + (0.16 + depth*0.34) + ")";
+      ctx.lineWidth = 0.9;
+      ctx.stroke();
+    }
+
+    // When every crest simultaneously reaches its maximum, each antinode
+    // pinches off a bubble — an array of bubbles above the crests. The bubble
+    // flies off at the same speed the surface takes to swing valley→crest.
+    var cph = Math.cos(phase);
+    if(!reduced){
+      if(Math.abs(cph) > 0.985 && !armed){
+        armed = true;
+        var K = Math.PI*FACE_UM/lam;          // antinodes at K·u = π/2 + mπ
+        var us = [], m;
+        for(m=-24;m<=24;m++){ var uu=(Math.PI/2+m*Math.PI)/K; if(uu>=-1&&uu<=1) us.push(uu); }
+        var crestR = Math.max(1.8, 30/(FACE_UM/lam));   // bubble size ∝ λ
+        var hS = H*0.115;
+        var rise = 2*hS/44.8 * 3.2;           // valley→crest speed, sped up for launch feel
+        for(var iu=0; iu<us.length; iu++){
+          for(var iv=0; iv<us.length; iv++){
+            var s = surface(us[iu], us[iv], k, phase);
+            if(s < 0.6) continue;             // only the crests at maximum
+            var pp = proj(us[iu], us[iv], s);
+            drops.push({ x:pp[0]+crestR*0.4, y:pp[1], vx:rise, vy:0,
+                         rt:crestR*(0.9+Math.random()*0.2), grow:0, life:1 });
+          }
+        }
+        if(drops.length > 300) drops.splice(0, drops.length-300);
+      } else if(Math.abs(cph) <= 0.9){
+        armed = false;                        // re-arm for the next peak
+      }
+    }
+    for(var d=drops.length-1;d>=0;d--){
+      var o = drops[d];
+      o.grow = Math.min(1, o.grow + 0.22);
+      var r = o.rt * (0.30 + 0.70*o.grow);    // pinch: swells as it detaches
+      o.x += o.vx; o.y += o.vy; o.life -= 0.013;   // constant rise speed, no decel
+      if(o.life <= 0){ drops.splice(d,1); continue; }
+      var a = o.life;
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, r, 0, Math.PI*2);
+      ctx.fillStyle = "rgba(155,232,223," + (a*0.12) + ")";
+      ctx.fill();
+      ctx.lineWidth = Math.max(0.8, r*0.16);
+      ctx.strokeStyle = "rgba(155,232,223," + (a*0.82) + ")";
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(o.x - r*0.34, o.y - r*0.34, Math.max(0.6, r*0.24), 0, Math.PI*2);
+      ctx.fillStyle = "rgba(234,240,238," + (a*0.7) + ")";
+      ctx.fill();
+    }
+
+    // annotations — the pane tag labels this view; keep the canvas clean
+    ctx.restore();
+  }
+
+  function readouts(){
+    var lam = lambdaUm(fMHz);
+    var rl = document.getElementById("r-lambda");
+    if(rl) rl.innerHTML = lam.toFixed(1) + "<em>µm</em>";
+    var rd = document.getElementById("r-drop");
+    if(rd) rd.innerHTML = (C_LANG*lam).toFixed(2) + "<em>µm</em>";
+    var fo = document.getElementById("freq-out");
+    if(fo) fo.textContent = fMHz.toFixed(2) + " MHz";
+  }
+
+  if(slider) slider.addEventListener("input", function(){
+    fMHz = parseFloat(slider.value);
+    readouts();
+    if(reduced) draw(0);
+  });
+
+  window.addEventListener("resize", resize);
+  resize();
+  readouts();
+
+  if(reduced){ draw(0); }
+  else { (function loop(t){ draw(t); requestAnimationFrame(loop); })(0); }
+})();
+
+(function(){
+  "use strict";
+  // ─────────────────────────────────────────────────────────────
+  //  Paste your Formspree endpoint here (Formspree → your form →
+  //  "Integration" → the POST URL). The endpoint carries only a
+  //  form ID, so the destination inbox never appears in this page.
+  //  REQUIRED: until it is set, the form cannot send.
+  var FORM_ENDPOINT = "https://formspree.io/f/mbgrvekr";
+  // ─────────────────────────────────────────────────────────────
+
+  var form   = document.getElementById("deck-form");
+  var btn    = document.getElementById("f-send");
+  var status = document.getElementById("f-status");
+  if(!form || !btn || !status) return;
+
+  function say(msg, ok){
+    status.textContent = msg;
+    if(ok === undefined) status.removeAttribute("data-ok");
+    else status.setAttribute("data-ok", ok ? "1" : "0");
+  }
+
+  function values(){
+    var d = new FormData(form), o = {};
+    d.forEach(function(v,k){ o[k] = typeof v === "string" ? v.trim() : v; });
+    return o;
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = values();
+
+    if(v._gotcha){ return; }                       // silently drop bots
+    if(!v.name){ say("Please add your name."); document.getElementById("f-name").focus(); return; }
+    if(!v.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email)){
+      say("Please check your email address."); document.getElementById("f-email").focus(); return;
+    }
+
+    if(FORM_ENDPOINT.indexOf("YOUR_FORM_ID") !== -1){
+      say("The form is not connected yet — please reach out on LinkedIn.", false);
+      return;
+    }
+
+    v._subject = "Zephyr Aquilon — enquiry from " + (v.name || "the site");
+    v._replyto = v.email;
+    btn.disabled = true;
+    say("Sending…");
+    fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify(v)
+    }).then(function(r){
+      if(!r.ok) throw new Error(r.status);
+      form.reset();
+      say("Thank you — we will be in touch.", true);
+      btn.textContent = "Sent";
+    }).catch(function(){
+      btn.disabled = false;
+      say("That did not send. Please reach out on LinkedIn instead.", false);
+    });
+  });
+})();
+
+(function(){
+  var t=document.querySelector(".nav-toggle"),n=document.getElementById("site-nav");
+  if(!t||!n)return;
+  t.addEventListener("click",function(){var o=n.getAttribute("data-open")==="1";n.setAttribute("data-open",o?"0":"1");t.setAttribute("aria-expanded",o?"false":"true");});
+})();
+
+</script>
 </body>
 </html>
