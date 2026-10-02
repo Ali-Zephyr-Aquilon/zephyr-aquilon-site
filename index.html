@@ -133,7 +133,7 @@ b,strong{font-weight:600}
 .split-canvas .pane--plume{flex:1.5 1 0}
 .split-canvas .pane--faraday{flex:1 1 0}
 .magnify{position:relative;margin-top:1.4rem}
-#faraday{clip-path:circle(48% at 50% 50%)}
+
 .lens-small{position:absolute;top:50%;left:67.5%;transform:translate(-50%,-50%);width:22px;height:22px;border:2px dashed #E5484D;border-radius:50%;box-shadow:0 0 0 3px rgba(10,23,27,.55);pointer-events:none;z-index:4}
 .lens-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:105%;aspect-ratio:1;border:2.2px dashed #E5484D;border-radius:50%;pointer-events:none;z-index:4}
 @media(max-width:640px){.split-canvas{flex-direction:column}}
@@ -1145,6 +1145,8 @@ makeInstrument({plume:"plume",  hist:"hist",  mode:"mfhun", fracId:"r-frac",  ve
   function draw(t){
     ctx.clearRect(0,0,W,H);
     ctx.save();
+    // mask: keep everything inside the red dashed lens (lens = 105% of pane height)
+    ctx.beginPath(); ctx.arc(W/2, H/2, H*0.525 - 2.5, 0, Math.PI*2); ctx.clip();
     ctx.translate(W/2, H/2); ctx.scale(0.8, 0.8); ctx.translate(-W/2, -H/2);
     var lam = lambdaUm(fMHz);
     var k = 2*Math.PI/lam;
