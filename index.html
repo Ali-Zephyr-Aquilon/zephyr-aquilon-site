@@ -128,6 +128,8 @@ b,strong{font-weight:600}
 .instrument-head .live{display:inline-flex;align-items:center;gap:.5rem;color:var(--wave)}
 .instrument-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wave);box-shadow:0 0 0 3px rgba(155,232,223,.18)}
 #plume,#faraday{display:block;width:100%;height:clamp(220px,30vw,320px)}
+#plume{height:clamp(280px,30vw,360px)}
+.split-canvas .pane--faraday{display:flex;align-items:center}
 .split-canvas{display:flex;align-items:stretch}
 .split-canvas .pane{position:relative;min-width:0}
 .split-canvas .pane--plume{flex:1.5 1 0}
@@ -135,8 +137,14 @@ b,strong{font-weight:600}
 .magnify{position:relative;margin-top:1.4rem;padding-bottom:1rem}
 
 .lens-small{position:absolute;top:50%;left:67.5%;transform:translate(-50%,-50%);width:22px;height:22px;border:2px dashed #E5484D;border-radius:50%;box-shadow:0 0 0 3px rgba(10,23,27,.55);pointer-events:none;z-index:4}
-.lens-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:94%;aspect-ratio:1;border:2.2px dashed #E5484D;border-radius:50%;pointer-events:none;z-index:4}
+.lens-big{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:calc(.94*clamp(220px,30vw,320px));aspect-ratio:1;border:2.2px dashed #E5484D;border-radius:50%;pointer-events:none;z-index:4}
 @media(max-width:640px){.split-canvas{flex-direction:column}}
+.zoom-link{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
+.zoom-link line{stroke:#E5484D;stroke-width:1.2;stroke-dasharray:4 4;opacity:.55}
+.steps{list-style:none;margin:0;padding:.9rem 1rem 1rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem 1.2rem;border-top:1px solid var(--rule-dark)}
+@media(min-width:860px){.steps{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.steps li{display:flex;gap:.6rem;align-items:flex-start;font-family:var(--mono);font-size:.6875rem;line-height:1.5;letter-spacing:.04em;color:#9DB4B9}
+.steps .num{flex:none;display:inline-grid;place-items:center;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--sand);color:#0A1416;font-weight:700;font-size:.6875rem;letter-spacing:0;margin-top:-.1rem}
 .instrument-data{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid var(--rule-dark)}
 @media(min-width:860px){.instrument-data{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
 .readouts{display:grid;grid-template-columns:1fr 1fr;align-content:start}
@@ -148,10 +156,6 @@ b,strong{font-weight:600}
 .readout .v{font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(1.4rem,.9rem + 1.4vw,2.1rem);font-weight:600;color:var(--wave);font-variant-numeric:tabular-nums;line-height:1}
 .readout .v em{font-style:normal;font-size:.55em;color:var(--muted-dark);margin-left:.25rem}
 #hist{display:block;width:100%;height:176px;margin-top:.6rem}
-.instrument-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.9rem 1.5rem;padding:.9rem 1rem;border-top:1px solid var(--rule-dark)}
-.advantages{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
-.advantages li{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wave);border:1px solid rgba(155,232,223,.4);border-radius:100px;padding:.4rem .85rem}
-.instrument-foot figcaption{font-family:var(--mono);font-size:.75rem;color:#84A0A6}
 
 /* key figures */
 .keyfigs{background:var(--ink);color:var(--mist);border-bottom:1px solid var(--rule-dark)}
@@ -159,6 +163,7 @@ b,strong{font-weight:600}
 @media(min-width:700px){.keyfigs .grid{grid-template-columns:repeat(3,1fr)}}
 .keyfig{background:var(--ink);padding:1.8rem 1.2rem}
 .keyfig .n{display:block;font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(1.8rem,1.2rem + 2.2vw,2.7rem);font-weight:700;color:var(--wave);line-height:1;font-variant-numeric:tabular-nums}
+.keyfig .n--text{font-size:clamp(1.25rem,1rem + .9vw,1.6rem);line-height:1.12;text-wrap:balance}
 .keyfig .t{display:block;font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;color:#93AAB0;margin-top:.8rem;line-height:1.55}
 .keyfig .t b{color:var(--mist);font-weight:500;display:block}
 
@@ -439,8 +444,8 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
         <h1>Inhaler for fragile biologics<span class="h1-sub">MEMS-enabled <em>Faraday-wave atomization</em></span></h1>
       </div>
       <div class="hero-aside">
-        <p class="pull">Delivery can be discreet, safe and precise.</p>
-        <p>We use Micro Electro-Mechanical Systems, the silicon technology inside every smartphone's microphone and gyroscope, to build a nebulizer for the inhalation of fragile biologics.</p>
+        <p class="pull">Solving a major bottleneck in drug delivery.</p>
+        <p>We use Micro Electro-Mechanical Systems, the silicon technology inside every smartphone's microphone and gyroscope, to build a handheld nebulizer for the inhalation of fragile biologics.</p>
         <div class="actions">
           <a class="btn" href="technology.html">See the technology</a>
           <a class="btn btn--ghost" href="company.html#contact">Request the deck</a>
@@ -449,21 +454,28 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
     </div>
 
     <figure class="instrument" aria-labelledby="instrument-cap">
-      <div class="instrument-head">
-        <span>MEMS chip · Faraday-wave atomization</span>
-      </div>
+      <figcaption class="instrument-head" id="instrument-cap">
+        <span>MEMS chip · Faraday-wave atomization (illustrative)</span>
+      </figcaption>
       <div class="magnify">
         <div class="split-canvas">
           <div class="pane pane--plume">
-            <canvas id="plume" role="img" aria-label="Animated illustration of droplet output from the MEMS nebulizer"></canvas>
+            <canvas id="plume" role="img" aria-label="Illustration of the MEMS chip, about 15 mm long: a piezo-driven stage feeds three amplifying Fourier-horn stages. A graph above shows relative vibration amplitude rising from piezo to tip, where it exceeds the atomization onset level and droplets are emitted."></canvas>
             <span class="lens-small" aria-hidden="true"></span>
           </div>
           <div class="pane pane--faraday">
-            <canvas id="faraday" role="img" aria-label="Magnified animated illustration of standing Faraday waves on the nozzle tip, shedding droplets from the wave crests"></canvas>
+            <canvas id="faraday" role="img" aria-label="Magnified view of the chip tip with a 10 micrometre scale: standing Faraday waves on the liquid surface, whose crests pinch off into uniform droplets."></canvas>
             <span class="lens-big" aria-hidden="true"></span>
           </div>
         </div>
+        <svg class="zoom-link" aria-hidden="true"><line id="zl1"/><line id="zl2"/></svg>
       </div>
+      <ol class="steps">
+        <li><span class="num">1</span>Piezo-driven chip</li>
+        <li><span class="num">2</span>Multi-stage amplifying Fourier horn</li>
+        <li><span class="num">3</span>Faraday waves form at the tip</li>
+        <li><span class="num">4</span>Wave crests pinch off into uniform droplets at onset amplitude</li>
+      </ol>
       <div class="instrument-data">
         <div class="readouts">
           <div class="readout">
@@ -475,15 +487,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
             <span class="v">≈0.4<em>mL/min</em></span>
           </div>
         </div>
-        <canvas id="hist" role="img" aria-label="Live histogram of droplet size distribution"></canvas>
-      </div>
-      <div class="instrument-foot">
-        <ul class="advantages">
-          <li>Monodisperse particle distribution</li>
-          <li>Milliwatt power / small format</li>
-          <li>Low-shear atomization</li>
-        </ul>
-        <figcaption id="instrument-cap">Computed for water (σ 72.8 mN/m, ρ 1000 kg/m³) as a baseline.</figcaption>
+        <canvas id="hist" role="img" aria-label="Histogram of droplet diameter: about 91 percent of droplets fall within the 1 to 5 micrometre target window, peaking near 3 micrometres."></canvas>
       </div>
     </figure>
   </div>
@@ -493,8 +497,8 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   <div class="wrap">
     <div class="grid">
       <div class="keyfig"><span class="n">15+ years</span><span class="t"><b>Relevant industry expertise</b>including a $200M drug delivery programme taken to market.</span></div>
-      <div class="keyfig"><span class="n">1–5 µm</span><span class="t"><b>Solving a major bottleneck</b>in inhaled biologics, which have stalled on aerosol quality.</span></div>
-      <div class="keyfig"><span class="n">100%</span><span class="t"><b>Bootstrapped to date</b>prototype, patent and simulation, self-funded.</span></div>
+      <div class="keyfig"><span class="n n--text">Inhaled biologics, unblocked</span><span class="t"><b>Uniform and gentle droplet generation,</b>capable on viscous formulations (up&nbsp;to&nbsp;5&nbsp;cP).</span></div>
+      <div class="keyfig"><span class="n">100%</span><span class="t"><b>Bootstrapped to date</b>prototype, IP and simulation, self-funded.</span></div>
     </div>
   </div>
 </section>
@@ -509,7 +513,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
       <div class="col prose">
         <p>AI is accelerating drug discovery and validation. A wave of new molecules and treatments is coming, for cancer, brain disorders, rare diseases and infectious diseases.</p>
         <p>Yet how we administer them has not changed. Patients are given bulky, awkward devices and the last thing they want is to display their hardship. <b>It's time to upgrade the way we administer drugs by solving a major bottleneck.</b></p>
-        <p>Micro Electro-Mechanical Systems (MEMS) are tiny components such as microphones, gyroscopes, camera optics found in our smartphones, machined with techniques from the semiconductor industry. We use them to build a ground-breaking nebulizer for fragile medical biologics.</p>
+        <p>Delivery can be discreet, safe and precise.</p>
       </div>
     </div>
   </div>
@@ -524,8 +528,8 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
       </div>
       <div class="col prose">
         <p><b>Biologics are the fastest-growing class of medicine, and almost all are injected.</b> Injectors are simply inconvenient: of 125,474 US adults newly prescribed a GLP-1, about half had discontinued within a year (<a href="https://doi.org/10.1001/jamanetworkopen.2024.57349" target="_blank" rel="noopener noreferrer">Rodriguez 2025</a>).</p>
-        <p><b>Why not a pill?</b> Because only a fraction of orally administered large molecules survives the metabolism.</p>
-        <p><b>The lung is the obvious alternative,</b> with a vascularized surface of 70–100 m², about half a tennis court. Existing dry powder inhalers and nebulizers fail to deliver a satisfactory aerosol. That is not a verdict on inhalation; it is a verdict on the device.</p>
+        <p><b>Why not a pill?</b> Because the gut is built to digest proteins: the oral bioavailability of peptides is typically below 1–2% (<a href="https://doi.org/10.1038/s41573-019-0053-0" target="_blank" rel="noopener noreferrer">Drucker 2020</a>).</p>
+        <p><b>The lung is the obvious alternative,</b> with a vascularized surface of 70–100 m², about half a tennis court. Existing dry powder inhalers and nebulizers struggle to aerosolize fragile, high-dose biologics without damaging them. <b>That is not a verdict on inhalation; it's a product and market brief.</b></p>
       </div>
     </div>
     <nav class="explore" aria-label="Continue reading">
@@ -585,6 +589,22 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 </footer>
 <script>
 /* Zephyr Aquilon — shared site script. Each block no-ops if its elements are absent. */
+var ZA_VISIBLE = true;   // animations idle while the instrument is off-screen
+(function(){
+  var fig = document.querySelector(".instrument");
+  if(!fig || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver(function(e){ ZA_VISIBLE = e[0].isIntersecting; }).observe(fig);
+})();
+function stepBadge(c, n, x, y){
+  c.save();
+  c.beginPath(); c.arc(x, y, 7.5, 0, Math.PI*2);
+  c.fillStyle = "#C9AE84"; c.fill();
+  c.fillStyle = "#0A1416";
+  c.font = "700 9px 'IBM Plex Mono', monospace";
+  c.textAlign = "center"; c.textBaseline = "middle";
+  c.fillText(String(n), x, y + 0.5);
+  c.restore();
+}
 function makeInstrument(opts){
   "use strict";
 
@@ -610,6 +630,13 @@ function makeInstrument(opts){
   function freqScale(){ return 1; }         // fixed 2 MHz design point — emit the measured profile as-is
 
   var mode = opts.mode;
+  var lensSmall = plume.parentNode.querySelector(".lens-small");
+  // vertical centre of the horn: pushed down so the amplitude graph fits above
+  function hornCY(){
+    mfGeom();
+    return H - MF.wBig*MF_SCALE - 34;
+  }
+  var DRIVE_W = 0.0084;   // rad/ms — same drive clock as the magnified tip face
   var particles = [];
   var sizeLog = [];          // rolling record of emitted diameters (µm)
   var W=0, H=0, dpr=1;
@@ -653,6 +680,17 @@ function makeInstrument(opts){
     return { cum: out, total: acc };
   })();
 
+  // share of the stated profile lying within 1–5 µm (bins uniform inside)
+  function profileInWindow(){
+    var bw = 20/BINS, inw = 0;
+    for(var i = 0; i < MF_PROFILE.length; i++){
+      var lo = MF_PROFILE[i][0]*bw, hi = lo + bw;
+      var ov = Math.max(0, Math.min(hi, 5) - Math.max(lo, 1));
+      inw += MF_PROFILE[i][1]*ov/bw;
+    }
+    return inw/MF_CUM.total;
+  }
+
   function sampleDiameter(){
     if(mode === "mfhun"){
       var bw = 20/BINS;   // profile bin width is fixed to its design scale, independent of display DMAX
@@ -674,22 +712,15 @@ function makeInstrument(opts){
 
   function emit(){
     var d = sampleDiameter();
-    var cy = H*0.5;
+    var cy = mode === "mfhun" ? hornCY() : H*0.5;
     var nozzleX, nozzleY, spread, speed;
     if(mode === "mfhun"){
       // ejected normal to the flat tip face, across the narrow tip aperture
       mfGeom();
       nozzleX = MF.tipX * MF_SCALE;
       nozzleY = cy + (Math.random()-0.5) * (MF.wSmall*2*MF_SCALE);
-      spread  = 0.055;
-      speed   = DRIFT + Math.random()*0.10;   // lifts off, barely moves
-    } else {
-      // extruded through pores distributed across the flat mesh plate
-      meshGeom();
-      nozzleX = MESH.plateX + 3;
-      nozzleY = cy + (Math.random()-0.5) * (MESH.ap*1.8);
-      spread  = 0.55;
-      speed   = 4.6 + Math.random()*2.2;      // pumped hard through the pore
+      spread  = 0.08;
+      speed   = 0.75 + Math.random()*0.20;    // gentle carry away from the tip
     }
     var ang = gauss()*spread;
     particles.push({
@@ -709,65 +740,6 @@ function makeInstrument(opts){
 
   function labelsOn(){ return W >= 240; }
   function shortLabels(){ return W < 640; }
-
-  function label(txt, x, y, align){
-    if(!labelsOn()) return;
-    pc.save();
-    pc.font = "700 6.5px 'IBM Plex Mono', monospace";
-    pc.fillStyle = "#5E787E";
-    pc.textAlign = align || "center";
-    pc.textBaseline = "top";
-    pc.fillText(txt.toUpperCase(), x, y);
-    pc.restore();
-  }
-
-  // Lays out a row of captions, clamped to the canvas. Captions keep their full
-  // wording; on narrow canvases they wrap onto two lines, and if a pair would
-  // still collide the later one drops to a further row.
-  function labelRow(items, baseY){
-    if(!labelsOn()) return;
-    var boxes = [], i, j;
-    pc.save();
-    pc.font = "700 6.5px 'IBM Plex Mono', monospace";
-    for(i = 0; i < items.length; i++){
-      var lines = (shortLabels() && items[i].wrap) ? items[i].wrap : [items[i].txt];
-      var w = 0;
-      for(j = 0; j < lines.length; j++){
-        w = Math.max(w, pc.measureText(lines[j].toUpperCase()).width);
-      }
-      var x = Math.max(3 + w/2, Math.min(W - 3 - w/2, items[i].x));
-      boxes.push({ lines: lines, w: w, x: x, row: 0 });
-    }
-    pc.restore();
-
-    for(i = 1; i < boxes.length; i++){
-      var moved = true, guard = 0;
-      while(moved && guard++ < 6){
-        moved = false;
-        for(j = 0; j < i; j++){
-          if(boxes[j].row === boxes[i].row &&
-             Math.abs(boxes[i].x - boxes[j].x) < (boxes[i].w + boxes[j].w)/2 + 8){
-            boxes[i].row++;
-            moved = true;
-          }
-        }
-      }
-    }
-
-    var LH = 6.25, rowLines = [], offsets = [], acc = 0;
-    for(i = 0; i < boxes.length; i++){
-      rowLines[boxes[i].row] = Math.max(rowLines[boxes[i].row] || 0, boxes[i].lines.length);
-    }
-    for(i = 0; i < rowLines.length; i++){
-      offsets[i] = acc;
-      acc += (rowLines[i] || 0)*LH + 2;
-    }
-    for(i = 0; i < boxes.length; i++){
-      for(j = 0; j < boxes[i].lines.length; j++){
-        label(boxes[i].lines[j], boxes[i].x, baseY + offsets[boxes[i].row] + j*LH, "center");
-      }
-    }
-  }
 
   // ── MFHUN: cascade of half-wavelength Fourier horn sections ──
   var MF = { driveX:0, baseX:0, tipX:0, sections:3, segW:0, wBig:0, wSmall:0 };
@@ -804,10 +776,9 @@ function makeInstrument(opts){
   }
 
   function drawMFHUN(t){
-    mfGeom();
+    var cy  = hornCY();
     pc.save();
-    pc.translate(0, H*0.5); pc.scale(MF_SCALE, MF_SCALE); pc.translate(0, -H*0.5);
-    var cy  = H*0.5;
+    pc.translate(0, cy); pc.scale(MF_SCALE, MF_SCALE); pc.translate(0, -cy);
     var pts = mfProfile();
     var i;
 
@@ -824,16 +795,17 @@ function makeInstrument(opts){
     pc.stroke();
 
     // piezo element centred within the drive stage
-    var pzW = (MF.baseX - MF.driveX)*0.80;
-    var pzH = MF.wBig*2*0.80;
+    // vibrating in thickness mode about its centre (the mounting node):
+    // contracts when the graph's drive-end displacement is positive
+    var drv = reduced ? 1 : Math.cos(t*DRIVE_W);
+    var pzW = (MF.baseX - MF.driveX)*0.80*(1 - 0.012*drv);
+    var pzH = MF.wBig*2*0.80*(1 + 0.004*drv);    // slight Poisson bulge
     var pzX = (MF.driveX + MF.baseX)/2 - pzW/2;
     var pzY = cy - pzH/2;
     pc.beginPath();
     pc.rect(pzX, pzY, pzW, pzH);
     pc.fillStyle = PZ_FILL;
     pc.fill();
-    pc.strokeStyle = "rgba(201,174,132,0.95)";
-    pc.stroke();
 
     // emitting tip face
     pc.beginPath();
@@ -844,78 +816,143 @@ function makeInstrument(opts){
     pc.stroke();
     pc.lineWidth = 1;
 
-    label("", (MF.driveX + MF.baseX)/2, cy - MF.wBig - 14, "center");
-    labelRow([
-      { txt:"piezo-driven stage",    wrap:["piezo-driven","stage"],    x:(MF.driveX + MF.baseX)/2 },
-      { txt:"multi-stage amplifying resonator", wrap:["multi-stage amplifying","resonator"], x:(MF.baseX  + MF.tipX)/2  },
-      { txt:"tip",                                                     x: MF.tipX + 11            }
-    ], cy + MF.wBig + 12);
   }
 
-  // ── Vibrating mesh nebulizer: reservoir, annular piezo, flat perforated plate ──
-  var MESH = { resX0:0, plateX:0, ap:0 };
-  function meshGeom(){
-    MESH.resX0  = W*0.055;
-    MESH.plateX = W*0.255;               // plate is bonded straight onto the reservoir
-    MESH.ap     = H*0.145;               // aperture half-height
-  }
-
-  function drawMesh(t){
-    meshGeom();
-    var cy  = H*0.5;
-    var osc = reduced ? 0 : Math.sin(t*0.22)*1.6;
-    var resH = H*0.37;
-
-    // reservoir, butted directly against the plate
-    pc.beginPath();
-    pc.rect(MESH.resX0, cy - resH/2, MESH.plateX - MESH.resX0, resH);
-    pc.fillStyle = SIL_FILL;
-    pc.fill();
-    pc.strokeStyle = SIL_LINE;
-    pc.lineWidth = 1;
-    pc.stroke();
-
-    // liquid (blue-ish, filling the reservoir)
-    pc.beginPath();
-    pc.rect(MESH.resX0 + 4, cy - resH/2 + 4, (MESH.plateX - MESH.resX0) - 5, resH - 8);
-    pc.fillStyle = "rgba(90,150,214,0.42)";
-    pc.fill();
-
-    // piezo elements clamping the plate top and bottom
-    pc.fillStyle = PZ_FILL;
-    pc.fillRect(MESH.plateX - 6, cy - MESH.ap - 13, 12, 13);
-    pc.fillRect(MESH.plateX - 6, cy + MESH.ap,      12, 13);
-
-    // flat perforated plate, pores drawn as gaps in the plate line
-    var pores = 9;
-    var px = MESH.plateX + osc;
-    pc.strokeStyle = "rgba(234,240,238,0.88)";
-    pc.lineWidth = 2.2;
-    pc.lineCap = "butt";
-    var top = cy - MESH.ap, span = MESH.ap*2;
-    var gap = 3.0, pitch = span/pores;
-    pc.beginPath();
-    pc.moveTo(px, top);
-    for(var i = 0; i < pores; i++){
-      var pyc = top + pitch*(i + 0.5);   // pore centre
-      pc.lineTo(px, pyc - gap/2);
-      pc.moveTo(px, pyc + gap/2);
+  // ── Amplitude along the horn: standing longitudinal wave, piezo → tip ──
+  // Each section is half a wavelength long, so section boundaries are
+  // antinodes and each section holds one node. Every horn stage multiplies
+  // the antinode amplitude by AMP_GAIN; the node shifts toward the narrow end.
+  var AMP_GAIN = 2;          // per-stage gain — illustrative
+  function ampAt(x){
+    var i, q;
+    if(x < MF.baseX){ i = 0; q = (x - MF.driveX)/(MF.baseX - MF.driveX); }
+    else {
+      i = Math.min(MF.sections, 1 + Math.floor((x - MF.baseX)/MF.segW));
+      q = (x - MF.baseX - MF.segW*(i-1))/MF.segW;
     }
-    pc.lineTo(px, top + span);
+    q = Math.max(0, Math.min(1, q));
+    var Ain = i === 0 ? 1 : (i % 2 ? -1 : 1)*Math.pow(AMP_GAIN, i-1);
+    var G   = i === 0 ? 1 : AMP_GAIN;
+    return Ain*((1+G)/2*Math.cos(Math.PI*q) + (1-G)/2);
+  }
+  function hornHalfAt(x){        // half-width of the body at x (unscaled)
+    if(x <= MF.baseX) return MF.wBig;
+    var q = ((x - MF.baseX) % MF.segW)/MF.segW;
+    if(x >= MF.tipX) q = 1;
+    return MF.wBig + (MF.wSmall - MF.wBig)*(0.5 - 0.5*Math.cos(Math.PI*q));
+  }
+
+  function drawAmp(t){
+    var cy = hornCY();
+    var S = MF_SCALE;
+    var x0 = MF.driveX*S, x1 = MF.tipX*S;
+    var gTop = 30, gBot = cy - MF.wBig*S - 16;
+    if(gBot - gTop < 40) return;
+    var mid = (gTop + gBot)/2;
+    var Amax = Math.pow(AMP_GAIN, MF.sections);
+    var ky = (gBot - gTop)/2/Amax*0.94*0.5;   // half-height graph
+    var drv = reduced ? 1 : Math.cos(t*DRIVE_W);
+    var N = 180, i, x, u;
+
+    // stage boundaries, dropped down to the body so the graph reads against it
+    pc.save();
+    pc.setLineDash([2,3]);
+    pc.strokeStyle = "rgba(94,120,126,0.55)";
+    pc.lineWidth = 1;
+    var bx = [MF.driveX, MF.baseX];
+    for(i = 1; i <= MF.sections; i++) bx.push(MF.baseX + MF.segW*i);
+    pc.beginPath();
+    for(i = 0; i < bx.length; i++){
+      var X = bx[i]*S + 0.5;
+      pc.moveTo(X, gTop); pc.lineTo(X, cy - hornHalfAt(bx[i])*S - 3);
+    }
+    pc.stroke();
+    // zero line
+    pc.strokeStyle = "rgba(94,120,126,0.7)";
+    pc.beginPath(); pc.moveTo(x0, mid + 0.5); pc.lineTo(x1, mid + 0.5); pc.stroke();
+    pc.restore();
+
+    // atomization onset: ± threshold amplitude, drawn over the last stage
+    var ONSET = 0.95*Amax;
+    var oX0 = (MF.baseX + MF.segW*(MF.sections - 0.6))*S, oX1 = x1 + 10;
+    pc.save();
+    pc.setLineDash([2,3]);
+    pc.strokeStyle = "rgba(194,112,90,0.9)";
+    pc.lineWidth = 1;
+    pc.beginPath();
+    pc.moveTo(oX0, mid - ONSET*ky + 0.5); pc.lineTo(oX1, mid - ONSET*ky + 0.5);
+    pc.moveTo(oX0, mid + ONSET*ky + 0.5); pc.lineTo(oX1, mid + ONSET*ky + 0.5);
+    pc.stroke();
+    pc.restore();
+
+    // live displacement u(x)·cos(ωt), in step with the piezo
+    pc.beginPath();
+    for(i = 0; i <= N; i++){
+      x = MF.driveX + (MF.tipX - MF.driveX)*i/N;
+      var y = mid - ampAt(x)*drv*ky;
+      if(i === 0) pc.moveTo(x*S, y); else pc.lineTo(x*S, y);
+    }
+    pc.strokeStyle = "rgba(155,232,223,0.95)";
+    pc.lineWidth = 1.6;
     pc.stroke();
     pc.lineWidth = 1;
 
-    label("piezo", MESH.plateX, cy - MESH.ap - 26, "center");
-    labelRow([
-      { txt:"reservoir", x:(MESH.resX0 + MESH.plateX)/2 },
-      { txt:"mesh",                    x: MESH.plateX + 6             }
-    ], cy + resH/2 + 12);
+    // end markers: piezo and tip amplitude
+    var uT = ampAt(MF.tipX)*drv, uP = ampAt(MF.driveX)*drv;
+    pc.fillStyle = "#9BE8DF";
+    pc.beginPath(); pc.arc(x1, mid - uT*ky, 2.6, 0, Math.PI*2); pc.fill();
+    pc.fillStyle = "#C9AE84";
+    pc.beginPath(); pc.arc(x0, mid - uP*ky, 2.2, 0, Math.PI*2); pc.fill();
+
+    if(labelsOn()){
+      pc.save();
+      pc.font = "700 9px 'IBM Plex Mono', monospace";
+      pc.textBaseline = "top";
+      pc.fillStyle = "#8AA2A7";
+      pc.textAlign = "left";
+      pc.fillText("VIBRATION AMPLITUDE (RELATIVE) \u00b7 PIEZO \u2192 TIP", x0, 10);
+      pc.fillStyle = "#5E787E";
+      pc.font = "700 8.5px 'IBM Plex Mono', monospace";
+      pc.textAlign = "left";
+      pc.textBaseline = "middle";
+      pc.fillStyle = "#C2705A";
+      if(x1 + 50 < W) pc.fillText("ONSET", x1 + 14, mid - ONSET*ky);
+      pc.restore();
+    }
   }
 
   function step(t){
     pc.clearRect(0,0,W,H);
 
-    if(mode === "mfhun"){ drawMFHUN(t); pc.restore(); } else drawMesh(t);
+    if(mode === "mfhun"){
+      drawMFHUN(t); pc.restore(); drawAmp(t);
+      var hcy = hornCY();
+      stepBadge(pc, 1, (MF.driveX + MF.baseX)/2*MF_SCALE, hcy);
+      stepBadge(pc, 2, (MF.baseX + MF.segW*1.5)*MF_SCALE, hcy);
+      var b3y = hcy + MF.wSmall*MF_SCALE + 14;
+      stepBadge(pc, 3, MF.tipX*MF_SCALE, b3y);
+      // page-space y of marker 3, so marker 4 in the lens can sit on the same line
+      var pr = plume.getBoundingClientRect();
+      window.ZA_B3_PAGEY = pr.top + b3y;
+      // overall chip length: 15 mm dimension line
+      var dx0 = MF.driveX*MF_SCALE, dx1 = MF.tipX*MF_SCALE;
+      var dy  = hcy + MF.wBig*MF_SCALE + 14, dmid = (dx0 + dx1)/2;
+      pc.save();
+      pc.font = "700 9.5px 'IBM Plex Mono', monospace";
+      var tw = pc.measureText("~15 mm").width/2 + 6;
+      pc.strokeStyle = "#8AA2A7"; pc.lineWidth = 1;
+      pc.beginPath();
+      pc.moveTo(dx0 + 0.5, dy - 4); pc.lineTo(dx0 + 0.5, dy + 4);
+      pc.moveTo(dx1 + 0.5, dy - 4); pc.lineTo(dx1 + 0.5, dy + 4);
+      pc.moveTo(dx0, dy + 0.5); pc.lineTo(dmid - tw, dy + 0.5);
+      pc.moveTo(dmid + tw, dy + 0.5); pc.lineTo(dx1, dy + 0.5);
+      pc.stroke();
+      pc.fillStyle = "#9DB4B9";
+      pc.textAlign = "center"; pc.textBaseline = "middle";
+      pc.fillText("~15 mm", dmid, dy + 0.5);
+      pc.restore();
+      if(lensSmall) lensSmall.style.top = hornCY() + "px";
+    }
 
     var rate = reduced ? 1 : (mode === "mfhun" ? 1 : 3);
     for(var e=0;e<rate;e++) emit();
@@ -1005,6 +1042,7 @@ function makeInstrument(opts){
     hc.fillStyle = "#9BE8DF";
     hc.font = "700 13px 'IBM Plex Mono', monospace";
     hc.textAlign = "center";
+    hc.textBaseline = "top";
     hc.fillText("TARGET WINDOW 1\u20135 \u00b5m", (x1+x2)/2, 5);
     hc.strokeStyle = "rgba(155,232,223,0.35)";
     hc.setLineDash([3,3]);
@@ -1052,7 +1090,10 @@ function makeInstrument(opts){
     var rm = opts.medId && document.getElementById(opts.medId);
     if(rm) rm.innerHTML = med.toFixed(1) + "<em>µm</em>";
     var rf = document.getElementById(opts.fracId);
-    if(rf) rf.innerHTML = Math.round((inW/sizeLog.length)*100) + "<em>%</em>";
+    if(rf && !rf.dataset.set){
+      rf.innerHTML = Math.round(profileInWindow()*100) + "<em>%</em>";
+      rf.dataset.set = "1";
+    }
   }
 
   function setVelocity(){
@@ -1065,6 +1106,7 @@ function makeInstrument(opts){
 
   var last = 0;
   function loop(t){
+    if(!ZA_VISIBLE){ requestAnimationFrame(loop); return; }
     step(t);
     if(t - last > 180){ drawHist(); last = t; }
     requestAnimationFrame(loop);
@@ -1291,8 +1333,42 @@ makeInstrument({plume:"plume",  hist:"hist",  mode:"mfhun", fracId:"r-frac",  ve
       ctx.fill();
     }
 
-    // annotations — the pane tag labels this view; keep the canvas clean
     ctx.restore();
+
+    // scale bar outside the lens, lower right: 10 µm along the face (vertical
+    // on screen). Face spans FACE_UM over 2·0.30·W raw px, drawn at 0.8×.
+    var R  = H*0.47;
+    var L  = 0.48*W*10/FACE_UM;
+    var bx = W/2 + R*0.42, by = H/2 + R*0.66;
+    {
+      ctx.save();
+      ctx.fillStyle = "rgba(10,23,27,0.82)";
+      ctx.beginPath();
+      if(ctx.roundRect) ctx.roundRect(bx - 18, by - L - 16, 36, L + 22, 4);
+      else ctx.rect(bx - 18, by - L - 16, 36, L + 22);
+      ctx.fill();
+      ctx.strokeStyle = "#9DB4B9"; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(bx, by); ctx.lineTo(bx, by - L);
+      ctx.moveTo(bx - 3, by); ctx.lineTo(bx + 3, by);
+      ctx.moveTo(bx - 3, by - L); ctx.lineTo(bx + 3, by - L);
+      ctx.stroke();
+      ctx.fillStyle = "#9DB4B9";
+      ctx.font = "700 9px 'IBM Plex Mono', monospace";
+      ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+      ctx.fillText("10 \u00b5m", bx, by - L - 4);
+      ctx.restore();
+    }
+    // marker 4: level with marker 3 when the panes sit side by side,
+    // otherwise near the bottom of the lens; always kept inside the circle
+    var dyB = R*0.82;
+    if(typeof window.ZA_B3_PAGEY === "number"){
+      var d = window.ZA_B3_PAGEY - cv.getBoundingClientRect().top - H/2;
+      if(Math.abs(d) <= R - 14) dyB = d;      // stacked panes: stay at the bottom
+    }
+    dyB = Math.max(-(R - 14), Math.min(R - 14, dyB));
+    var hx = Math.sqrt(Math.max(0, (R - 14)*(R - 14) - dyB*dyB));
+    stepBadge(ctx, 4, W/2 + Math.min(R*0.10, hx), H/2 + dyB);
   }
 
   function readouts(){
@@ -1316,7 +1392,37 @@ makeInstrument({plume:"plume",  hist:"hist",  mode:"mfhun", fracId:"r-frac",  ve
   readouts();
 
   if(reduced){ draw(0); }
-  else { (function loop(t){ draw(t); requestAnimationFrame(loop); })(0); }
+  else { (function loop(t){ if(ZA_VISIBLE) draw(t); requestAnimationFrame(loop); })(0); }
+})();
+
+(function(){
+  "use strict";
+  var host = document.querySelector(".magnify");
+  var s = host && host.querySelector(".lens-small"), b = host && host.querySelector(".lens-big");
+  var l1 = document.getElementById("zl1"), l2 = document.getElementById("zl2");
+  if(!s || !b || !l1) return;
+  function circ(el, o){
+    var r = el.getBoundingClientRect();
+    return { x: r.left + r.width/2 - o.left, y: r.top + r.height/2 - o.top, r: r.width/2 };
+  }
+  function set(l, x1, y1, x2, y2){
+    l.setAttribute("x1", x1); l.setAttribute("y1", y1);
+    l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+  }
+  function update(){
+    var o = host.getBoundingClientRect();
+    var c1 = circ(s, o), c2 = circ(b, o);
+    var dx = c2.x - c1.x, dy = c2.y - c1.y, D = Math.sqrt(dx*dx + dy*dy);
+    if(D <= Math.abs(c2.r - c1.r)) return;
+    var th = Math.atan2(dy, dx), al = Math.acos((c1.r - c2.r)/D);
+    [[l1, th + al], [l2, th - al]].forEach(function(p){
+      var cs = Math.cos(p[1]), sn = Math.sin(p[1]);
+      set(p[0], c1.x + c1.r*cs, c1.y + c1.r*sn, c2.x + c2.r*cs, c2.y + c2.r*sn);
+    });
+  }
+  window.addEventListener("resize", update);
+  if(document.fonts) document.fonts.ready.then(update);
+  (function tick(){ if(ZA_VISIBLE) update(); setTimeout(function(){ requestAnimationFrame(tick); }, 250); })();
 })();
 
 (function(){
