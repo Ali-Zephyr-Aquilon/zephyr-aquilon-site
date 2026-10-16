@@ -105,7 +105,7 @@ b,strong{font-weight:600}
 /* home hero */
 .hero{padding-top:clamp(3.5rem,8vw,6rem);padding-bottom:clamp(2.5rem,5vw,3.5rem);overflow:hidden}
 .hero-grid{display:grid;gap:2rem clamp(2rem,5vw,4.5rem);grid-template-columns:minmax(0,1fr)}
-@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:end}}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);align-items:end}.hero-grid .hero-aside{order:-1}.hero-grid > div:not(.hero-aside){text-align:right}.hero-grid > div:not(.hero-aside) .eyebrow{justify-content:flex-end}}
 .hero-aside p{font-size:1.0625rem;line-height:1.68;max-width:46ch}
 .hero-aside .pull{color:var(--wave);font-family:var(--display);font-size:1.25rem;line-height:1.35;font-weight:500;margin-bottom:1.4rem}
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.6rem}
@@ -458,10 +458,10 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
     <div class="hero-grid">
       <div>
         <p class="eyebrow">Lausanne, Switzerland · Seed stage</p>
-        <h1>Inhaler for fragile biologics<span class="h1-sub">MEMS-enabled <em>Faraday-wave atomization</em></span></h1>
+        <h1>Inhaler for fragile biologics<span class="h1-sub">Solving a major bottleneck in <em>drug delivery</em></span></h1>
       </div>
       <div class="hero-aside">
-        <p class="pull">Solving a major bottleneck in drug delivery.</p>
+        <p class="pull">MEMS-enabled Faraday-wave atomization.</p>
         <p>We use Micro Electro-Mechanical Systems, the silicon technology inside every smartphone's microphone and gyroscope, to build a handheld nebulizer for the inhalation of fragile biologics.</p>
         <div class="actions">
           <a class="btn" href="technology.html">See the technology</a>
