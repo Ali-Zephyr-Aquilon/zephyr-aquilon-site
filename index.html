@@ -72,9 +72,11 @@ b,strong{font-weight:600}
 /* ---------- site header ---------- */
 .site-head{position:sticky;top:0;z-index:50;background:rgba(13,27,31,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-dark)}
 .site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4.25rem}
-.wordmark{font-size:.9375rem;font-weight:700;font-variation-settings:"wdth" 120;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);text-decoration:none;white-space:nowrap}
-.wordmark .mark{display:inline-block;vertical-align:-.18em;height:1.15em;width:auto;margin:0 .18em;color:var(--sand);overflow:visible}
-.wordmark .mark path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.wordmark{display:inline-flex;flex-direction:column;align-items:center;gap:.2rem;font-family:var(--mono);font-size:.8125rem;font-weight:500;line-height:1;text-transform:uppercase;color:var(--mist);text-decoration:none;white-space:nowrap}
+.wordmark .w1{letter-spacing:.493em;margin-right:-.493em}
+.wordmark .w2{letter-spacing:.28em;margin-right:-.28em}
+.wordmark .mark{display:block;height:.9rem;width:auto;color:var(--sand);overflow:visible}
+.wordmark .mark path{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .site-nav{display:flex;align-items:center;gap:2rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
 .site-nav a{color:var(--muted-dark);text-decoration:none;transition:color .2s;padding:.4rem 0;position:relative}
 .site-nav a:hover{color:var(--mist)}
@@ -160,10 +162,11 @@ b,strong{font-weight:600}
 /* key figures */
 .keyfigs{background:var(--ink);color:var(--mist);border-bottom:1px solid var(--rule-dark)}
 .keyfigs .grid{display:grid;gap:1px;background:var(--rule-dark)}
-@media(min-width:700px){.keyfigs .grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px){@media(min-width:700px){.keyfigs .grid{grid-template-columns:repeat(3,1fr)}}}
 .keyfig{background:var(--ink);padding:1.8rem 1.2rem}
 .keyfig .n{display:block;font-family:var(--display);font-variation-settings:"wdth" 100;font-size:clamp(1.8rem,1.2rem + 2.2vw,2.7rem);font-weight:700;color:var(--wave);line-height:1;font-variant-numeric:tabular-nums}
-.keyfig .n--text{font-size:clamp(1.25rem,1rem + .9vw,1.6rem);line-height:1.12;text-wrap:balance}
+.keyfig .ix{display:block;font-family:var(--mono);font-size:.6875rem;letter-spacing:.18em;color:var(--sand);margin-bottom:.9rem}
+.keyfig .n--text{font-size:clamp(1.25rem,1rem + .9vw,1.6rem);line-height:1.12;text-wrap:balance;min-height:2.24em}
 .keyfig .t{display:block;font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;color:#93AAB0;margin-top:.8rem;line-height:1.55}
 .keyfig .t b{color:var(--mist);font-weight:500;display:block}
 
@@ -348,6 +351,18 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
 
+.hero > .wrap{position:relative;z-index:1}
+.hero h1,.hero .h1-sub{color:#F6FAF9}
+.hero h1 .h1-sub em{color:var(--wave)}
+.hero .hero-grid p,.hero .hero-grid .eyebrow{color:#E2EBEA}
+.hero .hero-aside .pull{color:var(--wave)}
+.hero .hero-grid h1,.hero .hero-grid p,.hero .hero-grid .eyebrow{text-shadow:0 1px 2px rgba(10,20,22,.9),0 0 18px rgba(10,20,22,.85)}
+.hero-bg{position:absolute;left:0;right:0;top:0;height:520px;background:url(hero-cover.jpg) center 35%/cover no-repeat;opacity:.3;mix-blend-mode:lighten;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 40%,transparent 100%),linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,#000 40%,transparent 100%),linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-composite:intersect}
+.hero-scrim{position:absolute;left:0;right:0;top:0;height:520px;pointer-events:none;background:radial-gradient(ellipse 70% 70% at 25% 50%,rgba(13,27,31,.6),transparent 75%)}
+@media(min-width:960px){.page-head{min-height:520px}}
+@media(max-width:959px){.hero-bg{opacity:.24;height:420px;background-position:70% 35%}.hero-scrim{height:420px}}
 </style>
 <script type="application/ld+json">
 {
@@ -424,7 +439,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
-    <a class="wordmark" href="index.html" aria-label="Zephyr Aquilon — home">Zephyr<svg class="mark" viewBox="0 0 36 16" role="img" aria-label="wave"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg>Aquilon</a>
+    <a class="wordmark" href="index.html" aria-label="Zephyr Aquilon — home"><span class="w1">Zephyr</span><svg class="mark" viewBox="0 0 36 16" aria-hidden="true"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg><span class="w2">Aquilon</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <a href="index.html" aria-current="page">Overview</a>
@@ -437,6 +452,8 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 
 <main id="main">
 <section class="dark hero fade-rule">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -493,12 +510,12 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   </div>
 </section>
 
-<section class="keyfigs" aria-label="Key figures">
+<section class="keyfigs" aria-label="Product advantages">
   <div class="wrap">
     <div class="grid">
-      <div class="keyfig"><span class="n">15+ years</span><span class="t"><b>Relevant industry expertise</b>including a $200M drug delivery programme taken to market.</span></div>
-      <div class="keyfig"><span class="n n--text">Inhaled biologics, unblocked</span><span class="t"><b>Uniform and gentle droplet generation,</b>capable on viscous formulations (up&nbsp;to&nbsp;5&nbsp;cP).</span></div>
-      <div class="keyfig"><span class="n">100%</span><span class="t"><b>Bootstrapped to date</b>prototype, IP and simulation, self-funded.</span></div>
+      <div class="keyfig"><span class="n n--text">Inhaled biologics, unblocked</span><span class="t"><b>Uniform and gentle aerosolization</b>Tight 1–5&nbsp;µm droplets at low shear, capable on viscous formulations (up&nbsp;to&nbsp;5&nbsp;cP).</span></div>
+      <div class="keyfig"><span class="n n--text">Self-care,<br>made convenient</span><span class="t"><b>Home care, adherence and remote monitoring</b>A pocket-sized connected device: patients dose at home, clinicians follow every dose remotely.</span></div>
+      <div class="keyfig"><span class="n n--text">Leveraging MEMS precision</span><span class="t"><b>Semiconductor-grade manufacturing</b>Wafer-level fabrication for chip-to-chip consistency, dose accuracy and cost at scale.</span></div>
     </div>
   </div>
 </section>
@@ -507,7 +524,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   <div class="wrap">
     <div class="split">
       <div class="col">
-        <p class="eyebrow"><span class="ix">01</span>Why now</p>
+        <p class="eyebrow">Why now</p>
         <h2>New molecules are booming. Delivery needs an upgrade.</h2>
       </div>
       <div class="col prose">
@@ -523,7 +540,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   <div class="wrap">
     <div class="split">
       <div class="col">
-        <p class="eyebrow"><span class="ix">02</span>The problem</p>
+        <p class="eyebrow">The problem</p>
         <h2>The lung is the obvious route. It needs the right device.</h2>
       </div>
       <div class="col prose">
@@ -563,7 +580,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 <footer class="site-foot">
   <div class="wrap foot-grid">
     <div>
-      <a class="wordmark" href="index.html">Zephyr<svg class="mark" viewBox="0 0 36 16" role="img" aria-label="wave"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg>Aquilon</a>
+      <a class="wordmark" href="index.html" aria-label="Zephyr Aquilon — home"><span class="w1">Zephyr</span><svg class="mark" viewBox="0 0 36 16" aria-hidden="true"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg><span class="w2">Aquilon</span></a>
       <p>A MEMS nebulizer for needle-free delivery of fragile biologics. Lausanne, Switzerland.</p>
     </div>
     <div>
