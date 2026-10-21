@@ -261,8 +261,8 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
 .rail{margin-top:clamp(2.2rem,5vw,3rem);position:relative}
 .rail ol{list-style:none;margin:0;padding:0;display:grid;gap:1.8rem}
 @media(min-width:900px){
-  .rail ol{grid-template-columns:repeat(5,1fr);gap:0}
-  .rail::before{content:"";position:absolute;left:11px;right:10%;top:11px;height:2px;background:linear-gradient(90deg,var(--wave) 0 16%,var(--rule) 16%)}
+  .rail ol{grid-template-columns:repeat(4,1fr);gap:0}
+  .rail::before{content:"";position:absolute;left:11px;right:12.5%;top:11px;height:2px;background:linear-gradient(90deg,var(--wave) 0 22%,var(--rule) 22%)}
   .rail li{padding-right:1.2rem}
 }
 .rail li{position:relative}
@@ -396,7 +396,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   <div class="wrap">
     <p class="eyebrow">Company</p>
     <h1>Respiratory and systemic biologics .</h1>
-    <p class="intro">A bootstrapped Lausanne deep-tech company taking a MEMS nebulizer from benchtop prototype to market launch with pharma partners.</p>
+    <p class="intro">A bootstrapped Lausanne deep-tech company taking a MEMS nebulizer from benchtop prototype to market launch.</p>
     <ul class="jump">
       <li><a href="#market">Market</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
@@ -411,10 +411,10 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
     <div class="split">
       <div class="col">
         <p class="eyebrow"><span class="ix">01</span>Market</p>
-        <h2>An urgent problem now, a new capability later.</h2>
+        <h2>Local administration for respiratory diseases, first.<br>Route to systemic delivery, later.</h2>
       </div>
       <div class="col prose">
-        <p>We enter where drugs are already approved for inhalation and dose consistency and form factor are enough to compete. Then open the lung to molecules that cannot be inhaled today.</p>
+        <p>We unlock a band of biologics that cannot be inhaled, mAbs to treat COPD are an obvious example.</p>
       </div>
     </div>
     <div class="markets">
@@ -445,10 +445,9 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
       </div>
       <div class="col prose">
         <ol>
-          <li>Move from benchtop prototype to MVP</li>
-          <li>Validate the drug-stability claim against incumbent technologies</li>
-          <li>Pharma partnership and clinical studies</li>
-          <li>Build QMS and manufacturing line</li>
+          <li>Benchtop prototype and technical feasibility</li>
+          <li>Handheld prototype; Validate the drug-stability claim</li>
+          <li>Validation on partner molecule, QMS and Manufacturing</li>
           <li>Market launch</li>
         </ol>
       </div>
@@ -456,15 +455,13 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
     <div class="rail">
       <ol>
         <li><span class="dot dot--now"></span><span class="ph">Phase 1</span><span class="st st--now">In progress · 80%</span>
-          <p>Proof of concept and IP. Benchtop prototype, patent filed, shear simulation. Aerosol observed on our own hardware, not yet characterised.</p></li>
+          <p>Proof of concept and IP. Benchtop prototype, patent filed, shear simulation. Aerosol observed on our own hardware.</p></li>
         <li><span class="dot"></span><span class="ph">Phase 2</span><span class="st">Next</span>
-          <p>Alpha device. Handheld prototype and stability testing on a representative biologic.</p></li>
-        <li><span class="dot dot--gate"></span><span class="ph">Go / no-go</span><span class="st st--gate">Q4 2028</span>
-          <p>A stated decision on the platform thesis, judged against the evidence.</p></li>
+          <p>Handheld prototype and stability testing on a representative biologic.</p></li>
         <li><span class="dot"></span><span class="ph">Phase 3</span><span class="st">Planned</span>
-          <p>Beta device and clinical. Validation on a partner molecule, the regulatory route and QMS implementation.</p></li>
-        <li><span class="dot"></span><span class="ph">Phase 4</span><span class="st">Target 2034</span>
-          <p>First molecule launch. Manufacturing scale-up and market entry with the partner; medical-device and combination-product certification.</p></li>
+          <p>Validation on a partner molecule, the regulatory route and QMS implementation. Manufacturing scale-up.</p></li>
+        <li><span class="dot"></span><span class="ph">Phase 4</span><span class="st">Target 2032</span>
+          <p>First molecule launch. Market entry with the partner; medical-device and combination-product certification.</p></li>
       </ol>
     </div>
   </div>
@@ -478,7 +475,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
         <h2>Why I left a good job to do this.</h2>
       </div>
       <div class="col prose">
-        <p>I have spent over ten years building inhalation devices, including a $200M programme that reached market successfully, and I know what separates a device that works on a bench from one that reaches market. When I understood what this architecture could do, I wanted to serve society better by becoming who I always wanted to be.</p>
+        <p>I have spent over ten years building inhalation devices, including a $200M programme that reached market successfully, and I know what separates a device that works on a bench from one that reaches market. I was strongly driven by a will to serve society better by becoming who I always wanted to be.</p>
         <p><b>So I left a safe job and pressed on.</b> Everything here: the prototypes, the patent, the simulation, the wafer runs; I paid for out of my own savings. The nights, the weekends and the risk are mine.</p>
         <p>Bootstrapping carried the technology to where the remaining questions cost money to answer, <b>and that is exactly what the seed round is for.</b></p>
       </div>
@@ -548,7 +545,7 @@ a.tag--pub:hover{background:#3F6B4E;border-color:#3F6B4E;color:var(--paper)}
   <div class="wrap foot-grid">
     <div>
       <a class="wordmark" href="index.html" aria-label="Zephyr Aquilon — home"><span class="w1">Zephyr</span><svg class="mark" viewBox="0 0 36 16" aria-hidden="true"><path d="M1.50 8.00 C2.60 7.53 3.70 6.99 4.80 6.91 C5.90 6.82 7.00 7.27 8.10 8.00 C9.20 8.73 10.30 9.62 11.40 9.75 C12.50 9.87 13.60 9.12 14.70 8.00 C15.80 6.88 16.90 5.56 18.00 5.41 C19.10 5.26 20.20 6.40 21.30 8.00 C22.40 9.60 23.50 11.39 24.60 11.56 C25.70 11.73 26.80 10.14 27.90 8.00 C29.00 5.86 30.10 3.56 31.20 3.37 C32.30 3.18 33.40 5.28 34.50 8.00"/></svg><span class="w2">Aquilon</span></a>
-      <p>A MEMS nebulizer for needle-free delivery of fragile biologics. Lausanne, Switzerland.</p>
+      <p>A MEMS nebulizer for the inhalation of fragile biologics. Lausanne, Switzerland.</p>
     </div>
     <div>
       <h4>Site</h4>
